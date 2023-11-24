@@ -1,0 +1,23 @@
+let z : i32;
+fn square : i32 (x : i32) {
+	return x;
+};
+
+main : i32 {
+	let y : i32;
+	let y : i32;
+	y = 15;
+	let x : i32;
+	x = 20 + y * 3;
+	print(x);
+	let str1 : string;
+	let str2 : string;
+    {
+        let d : string;
+    }
+	str1 = 'This my string';
+	str2 = 'This string';
+	let z : bool;
+	z = strcmp(str1, str2);
+	return 0;
+};

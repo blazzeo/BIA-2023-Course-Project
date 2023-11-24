@@ -1,0 +1,3 @@
+/Users/ivanbraganets/kursovoy/bin/CMakeFiles/main.dir
+/Users/ivanbraganets/kursovoy/bin/CMakeFiles/edit_cache.dir
+/Users/ivanbraganets/kursovoy/bin/CMakeFiles/rebuild_cache.dir
