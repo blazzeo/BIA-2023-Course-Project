@@ -365,4 +365,19 @@ Fst::RELATION('9',1)),\
 #define COLON Fst::CHAIN(2, Lexer::colon, \
                 Fst::NODE(1, Fst::RELATION(':',1)), \
                 Fst::NODE())
+#define IF Fst::CHAIN(3, Lexer::condition, \
+                Fst::NODE(1, Fst::RELATION('i',1)), \
+                Fst::NODE(1, Fst::RELATION('f',2)), \
+                Fst::NODE())
+#define FOR Fst::CHAIN(4, Lexer::loop, \
+                Fst::NODE(1, Fst::RELATION('f',1)), \
+                Fst::NODE(1, Fst::RELATION('o',2)), \
+                Fst::NODE(1, Fst::RELATION('r',3)), \
+                Fst::NODE())
+#define LESS Fst::CHAIN(2, Lexer::less, \
+                Fst::NODE(1, Fst::RELATION('<',1)), \
+                Fst::NODE())
+#define GREATER Fst::CHAIN(2, Lexer::greater, \
+                Fst::NODE(1, Fst::RELATION('>',1)), \
+                Fst::NODE())
 

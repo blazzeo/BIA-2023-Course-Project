@@ -3,9 +3,7 @@
 #include "iostream"
 #include "Sem.h"
 #include <cstddef>
-#include <iomanip>
-#include "iomanip"
-#include "format"
+#include <string>
 
 namespace Sem {
 
@@ -15,6 +13,7 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
     if (!prevScope) scope.specs.name = "GLOBAL";
     scope.prevScope = prevScope;
 
+  //  SCOPE SPECS
     if (prevScope != nullptr) {
         bool parmlist = false;
         int i = id;
@@ -24,7 +23,7 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
                 parmlist = true;
                 while(token.type != Lexer::open_parm_brackets) {
                     if (token.type == Lexer::identifier) {
-                        scope.parms.push_back(token.identifier.value());
+                        scope.parms.push_back(token.identifier);
                     }
                     token = table->tokens[--i];
                 }
@@ -32,6 +31,11 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
             // if (token.type == Lexer::func) {
             //     scope.specs.isFunc = true;
             // }
+            if (token.type == Lexer::condition) {
+                scope.specs.name = "if";
+                scope.specs.returnType = Lexer::undef;
+                break;
+            }
             if (token.type == Lexer::identifier) {
                 if (!parmlist) break;
                 scope.specs.name = token.identifier->name;
@@ -56,8 +60,11 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
                 if (token.identifier->type != Lexer::undef) {
                     bool found = false;
                     for (auto parm : scope.parms)
-                        if (parm.name == token.identifier->name) 
-                        found = true;
+                        if (parm->name == token.identifier->name) 
+                          found = true;
+                    for (auto ident : scope.Identifiers)
+                      if (ident->name == token.identifier->name) // if ident was declared before
+                          // throw ERROR_THROW(100);
                     if (!found) scope.Identifiers.push_back(token.identifier);
                 }
                 break;
@@ -88,67 +95,34 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
     return scope;
 }
 
-void PrintTable(Scope scope) {
-    std::cout << "===========" << ' '<< scope.specs.name << ' ' << "=============" << '\n';
-    std::cout << "Parms : \n";
-    for (size_t i = 0; i < scope.parms.size(); i++) {
-        std::cout << i << '\t' << scope.parms[i].name << '\t';
-        switch(scope.parms[i].type) {
-            case 0 :
-                std::cout << "int" << std::endl;
-                break;
-            case 1 :
-                std::cout << "str" << std::endl;
-                break;
-            case 2 :
-                std::cout << "bool" << std::endl;
-                break;
-            case 3 :
-                std::cout << "undef" << std::endl;
-                break;
-        }
+void PrintTable(Scope scope, short level) {
+  std::string type [4] = {
+    "int",
+    "str",
+    "bool",
+    "void"
+  };
+  std::string tabs(level, '\t');
+  tabs[level-1]='|';
+  std::cout << std::endl << tabs << "==== " << scope.specs.name << " : " << type[scope.specs.returnType] << std::endl;
+  std::cout << " ====" << '\n';
+  std::cout << tabs << "Parms : \n";
+  for (size_t i = 0; i < scope.parms.size(); i++) {
+    std::cout << tabs << i << '\t' << scope.parms[i]->name << '\t' << type[scope.parms[i]->type] << std::endl;
+  }
+  std::cout << tabs << "Identifiers : \n";
+  for (size_t i = 0; i < scope.Identifiers.size(); i++) {
+    std::cout << tabs << i << '\t' << scope.Identifiers[i]->name << '\t' << type[scope.Identifiers[i]->type] << std::endl;
+  }
+  if (!scope.nextScopes.empty()) {
+    std::cout << tabs << "Next scopes: \n";
+    for (size_t i = 0; i < scope.nextScopes.size(); i++) {
+      std::cout << tabs << i << '\t' << scope.nextScopes[i].specs.name << '\t' << type[scope.nextScopes[i].specs.returnType] << std::endl;
     }
-    std::cout << "Identifiers : \n";
-    for (size_t i = 0; i < scope.Identifiers.size(); i++) {
-        std::cout << i << '\t' << scope.Identifiers[i]->name << '\t'; 
-        switch(scope.Identifiers[i]->type) {
-            case 0 :
-                std::cout << "int" << std::endl;
-                break;
-            case 1 :
-                std::cout << "str" << std::endl;
-                break;
-            case 2 :
-                std::cout << "bool" << std::endl;
-                break;
-            case 3 :
-                std::cout << "undef" << std::endl;
-                break;
-        }
+    for(auto nscope : scope.nextScopes) {
+      PrintTable(nscope, level+1);
     }
-    if (!scope.nextScopes.empty()) {
-        std::cout << "Next scopes: \n";
-        for (size_t i = 0; i < scope.nextScopes.size(); i++) {
-            std::cout << i << '\t' << scope.nextScopes[i].specs.name << '\t'; 
-            switch (scope.nextScopes[i].specs.returnType) {
-                case 0 :
-                    std::cout << "int" << std::endl;
-                    break;
-                case 1 :
-                    std::cout << "str" << std::endl;
-                    break;
-                case 2 :
-                    std::cout << "bool" << std::endl;
-                    break;
-                case 3 :
-                    std::cout << "undef" << std::endl;
-                    break;
-            }
-        }
-        for(auto nscope : scope.nextScopes) {
-            PrintTable(nscope);
-        }
-    }
-    return;
+  }
+  return;
 }
 }

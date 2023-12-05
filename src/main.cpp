@@ -9,10 +9,8 @@
 #include "Semantics/Sem.h"
 #include "Syntacsis/MFST.h"
 
-#include <cwchar>
 #include <vector>
 #include <iostream>
-#include <cstdlib>
 
 int main(int argc, char* argv[]) {
     setlocale(LC_ALL, "en_US.UTF-8");
@@ -31,15 +29,16 @@ int main(int argc, char* argv[]) {
         Log::WriteParm(log, parm);
         In::IN in = In::getin(parm.in);
         Lexer::Table table = Lexer::tokenize(in);
+    Lexer::generateLog(table);
         int i = 0;
         Sem::Scope structure = Sem::scopenize(&table, i);
-        Sem::PrintTable(structure);
-        // MFST_TRACE_START;
-        // MFST::Mfst mfst(table, GRB::getGreibach());
-        // mfst.start();
-        // mfst.savededucation();
-        // std::cout << std::endl << "\t\tRules\n";
-        // mfst.printrules();
+        // Sem::PrintTable(structure);
+        MFST_TRACE_START;
+        MFST::Mfst mfst(table, GRB::getGreibach());
+        mfst.start();
+        mfst.savededucation();
+        std::cout << std::endl << "\t\tRules\n";
+        mfst.printrules();
         Out::WriteOut(out, table);
         Log::WriteIn(log, in);
         Log::Close(log);

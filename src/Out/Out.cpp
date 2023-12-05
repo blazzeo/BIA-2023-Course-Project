@@ -33,7 +33,6 @@ void WriteError(OUT out, Error::ERROR e) {
 }
 
 void WriteOut(OUT out, Lexer::Table table) {
-    const std::string tokenTypes = " ;{}()[]+*/-,=ittmlrfdpu";
     if (out.stream && out.stream->is_open()) {
         int lineNum = -1;
         for (auto token : table.tokens) {

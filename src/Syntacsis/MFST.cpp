@@ -1,5 +1,6 @@
 #include "MFST.h"
 #include "stdio.h"
+#include "iostream"
 
 namespace MFST
 {
@@ -167,16 +168,30 @@ namespace MFST
         case NS_NORULE:
             {
                 MFST_TRACE4("------>NS_NORULE")
-                std::cout << "------------------------------------------------------------------------------------------   ------" << std::endl;
+                std::cout << "-----------------------------------------------------------------------------------------------" << std::endl;
+                std::cout << "!@#" << std::endl;
                 std::cout << getDiagnosis(0, buf) << std::endl;
+                std::cout << "!@#" << std::endl;
                 std::cout << getDiagnosis(1, buf) << std::endl;
                 std::cout << getDiagnosis(2, buf) << std::endl;
                 break;
         }
 
-        case NS_NORULECHAIN:	MFST_TRACE4("------>NS_NORULECHAIN") break;
-        case NS_ERROR:			MFST_TRACE4("------>NS_ERROR") break;
-        case SURPRISE:			MFST_TRACE4("------>NS_SURPRISE") break;
+        case NS_NORULECHAIN:
+        {
+                std::cout << "1" << std::endl;
+            MFST_TRACE4("------>NS_NORULECHAIN") break;
+        }
+        case NS_ERROR:			
+        {
+                std::cout << "2" << std::endl;
+            MFST_TRACE4("------>NS_ERROR") break;
+        }
+        case SURPRISE:		
+        {
+            std::cout << "3" << std::endl;
+            MFST_TRACE4("------>NS_SURPRISE") break;
+        }
 
 
     }

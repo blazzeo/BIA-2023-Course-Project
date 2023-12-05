@@ -1,6 +1,8 @@
 #pragma once
+#include <memory>
 #include <string>
 #include <optional>
+#include <variant>
 #include <vector>
 #include "../In/In.h"
 
@@ -32,7 +34,11 @@ enum TokenType {
     print,
     undefined,
     bl,
-    colon
+    colon,
+    condition,
+    loop,
+    less,
+    greater
 };
 
 enum ValueType {
@@ -43,65 +49,66 @@ enum ValueType {
 };
 
 struct Identifier {
-    std::string value;
-    std::string name;
-    ValueType type;
-    bool isFunc = 0;
+  std::string name;
+  ValueType type;
+  bool isFunc = 0;
+  std::variant<int, std::string, bool> value;
+  short parms_count = 0;
 
     Identifier(std::string nm, ValueType tp, bool isfunc = 0)
         : name(nm), type(tp), isFunc(isfunc)
     {
         switch(tp) {
             case i:
-                value = "0";
+                value = 0;
                 break;
             case str:
-                value = "null";
+                value = "";
                 break;
             case bol:
-                value = "0";
+                value = false;
                 break;
             case undef:
-                value = "0";
+                value = "undef";
                 break;
         }
     }
 };
 
-const std::string tokenTypes = " ;{}()[]vvvv,=ittmlrfdput:";
+const std::string tokenTypes = " ;{}()[]vvvv,=ittmlrfdput:?@vv";
 
 struct Token {
-    TokenType type;
-    unsigned short lineNum;
-    char lexema = ' ';
-    std::optional<Identifier> identifier;
-    std::optional<std::string> value;
+  TokenType type;
+  unsigned short lineNum;
+  char lexema = ' ';
+  std::shared_ptr<Identifier> identifier = nullptr;
+  std::optional<std::string> value;
 
-    Token() : type(undefined), lineNum(-1) {}
-    Token(TokenType tp, short ln) : type(tp), lineNum(ln) {
-        lexema = tokenTypes[tp];
-        if (tp == 17)
-            identifier = Identifier("main", i, 1);
-    }
-    Token(TokenType tp, short ln, Identifier ident)
-    : type(tp), lineNum(ln), identifier(ident) {
-        lexema = tokenTypes[tp];
-        if (tp == 17)
-            identifier = Identifier("main", i, 1);
-    }
-    Token(TokenType tp, short ln, std::string val)
-    : type(tp), lineNum(ln), value(val) {
-        lexema = tokenTypes[tp];
-        if (tp == 17)
-            identifier = Identifier("main", i, 1);
-    }
+  Token() : type(undefined), lineNum(-1) {}
+  Token(TokenType tp, short ln, std::string val = "")
+      : type(tp), lineNum(ln), value(val) {
+    lexema = tokenTypes[tp];
+  }
+  Token(TokenType tp, short ln, std::shared_ptr<Identifier> ident)
+      : type(tp), lineNum(ln), identifier(ident) {
+    lexema = tokenTypes[tp];
+  }
+  Token& operator=(Token oldToken) {
+    this->type = oldToken.type;
+    this->lineNum = oldToken.lineNum;
+    this->lexema = oldToken.lexema;
+    this->identifier = oldToken.identifier;
+    this->value = oldToken.value;
+    return *this;
+  }
 };
 
 struct Table {
     std::vector<Token> tokens;
-    std::vector<Identifier> identifiers;
+    std::vector<std::shared_ptr<Identifier>> identifiers;
 };
 
 // void checkLexem(Table&, std::string, std::vector<Fst::CHAIN>, size_t);
 Table tokenize(In::IN&);
+void generateLog(Table&);
 }

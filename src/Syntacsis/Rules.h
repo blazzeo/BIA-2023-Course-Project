@@ -9,7 +9,7 @@
 namespace GRB
 {
 	Greibach greibach(NS('S'), TS('$'),				//стартовый символ, дно стека
-		6,											//количество правил
+		7,											//количество правил
         {
 		Rule(NS('S'), GRB_ERROR_SERIES + 0,			//Неверная структура программы
 			6, 	//S →	m{NrE;};	|	fi:t(F){NrE;};S	|	m{NrE;};S	|	tfi(F){NrE;}; | i{NrE;}
@@ -23,7 +23,7 @@ namespace GRB
        }
 		),
 		Rule(NS('N'), GRB_ERROR_SERIES + 1,			//Операторы программы
-			10, 		//N	→	di:t; | rE; | i = E; | fi:t(F); | di:t;N | rE;N | i=E;N | fi:t(F);N | pE; | pE;N
+			14, 	//N	→	di:t; | rE; | i = E; | fi:t(F); | di:t;N | rE;N | i=E;N | fi:t(F);N | pE; | pE;N | ?(E){N}; | @(E){N};
        {
 			Rule::Chain(5, { TS('d'), TS('i'), TS(':'), TS('t'), TS(';')}),
 			Rule::Chain(4, { TS('i'), TS('='), NS('E'), TS(';')}),
@@ -33,8 +33,12 @@ namespace GRB
 			Rule::Chain(4, { TS('r'), NS('E'), TS(';'), NS('N')}),
 			Rule::Chain(5, { TS('i'), TS('='), NS('E'), TS(';'), NS('N')}),
 			Rule::Chain(9, { TS('f'), TS('i'), TS(':'), TS('t'), TS('('), NS('F'), TS(')'), TS(';'), NS('N')}),
-			Rule::Chain(3, { TS('p'), NS('E'), TS(';')}),
-			Rule::Chain(4, { TS('p'), NS('E'), TS(';'), NS('N')})
+			Rule::Chain(5, { TS('p'), TS('('), NS('E'), TS(')'), TS(';')}),
+			Rule::Chain(6, { TS('p'), TS('('), NS('E'), TS(')'), TS(';'), NS('N')}),
+            Rule::Chain(8, { TS('?'), TS('('), NS('E'), TS(')'), TS('{'), NS('N'), TS('}'), TS(';')}),  // IF
+            Rule::Chain(12,{ TS('@'), TS('('), NS('Z'), TS(';'), NS('Z'), TS(';'), NS('Z'), TS(')'), TS('{'), NS('N'), TS('}'), TS(';')}),   // FOR
+            Rule::Chain(9, { TS('?'), TS('('), NS('E'), TS(')'), TS('{'), NS('N'), TS('}'), TS(';'), NS('N')}),  // IF
+            Rule::Chain(12,{ TS('@'), TS('('), NS('Z'), TS(';'), NS('Z'), TS(';'), NS('Z'), TS(')'), TS('{'), NS('N'), TS('}'), TS(';'), NS('N')})  // IF
        }),
 		Rule(NS('E'), GRB_ERROR_SERIES + 2,			//Выражение
 			9,		//E →	i	|	l	|	(E)	|	i(W)	|	iM	|	lM	|	(E)M	|	i(W)M|	i()
@@ -67,12 +71,21 @@ namespace GRB
        }
 		),
 		Rule(NS('M'), GRB_ERROR_SERIES + 2,			//Выражение
-			2,		//M →		vE	|	vEM
+			3,		//M →		vE	|	vEM   |     ==E
        {
 			Rule::Chain(2, { TS('v'), NS('E')}),
-			Rule::Chain(3, { TS('v'), NS('E'), NS('M')})
+			Rule::Chain(3, { TS('v'), NS('E'), NS('M')}),
+            Rule::Chain(3, { TS('='), TS('='), NS('E')})
        }
-		)
+		),
+        Rule(NS('Z'), GRB_ERROR_SERIES + 2,
+             3,     //Z ->      di:t=E | di:t=E,Z | i=E 
+             {
+             Rule::Chain(6, { TS('d'), TS('i'), TS(':'), TS('t'), TS('='), NS('E')}),
+             Rule::Chain(8, { TS('d'), TS('i'), TS(':'), TS('t'), TS('='), NS('E'), TS(','), NS('Z')}),
+             Rule::Chain(3, { TS('i'), TS('='), NS('E')})
+             }
+             )
        }
 	);
 }
