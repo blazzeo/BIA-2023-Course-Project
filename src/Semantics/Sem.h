@@ -13,8 +13,8 @@ struct Scope {
         bool isFunc = false;
         std::string name = "undef";
     } specs;
-    std::vector<std::shared_ptr<Lexer::Identifier>> Identifiers;
-    std::vector<std::shared_ptr<Lexer::Identifier>> parms;
+    std::vector<Lexer::Identifier> Identifiers;
+    std::vector<Lexer::Identifier> parms;
     Scope* prevScope = nullptr;
     std::vector<Scope> nextScopes;
 };

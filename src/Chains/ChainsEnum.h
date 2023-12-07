@@ -380,4 +380,6 @@ Fst::RELATION('9',1)),\
 #define GREATER Fst::CHAIN(2, Lexer::greater, \
                 Fst::NODE(1, Fst::RELATION('>',1)), \
                 Fst::NODE())
-
+#define MOD Fst::CHAIN(2, Lexer::mod, \
+                Fst::NODE(1, Fst::RELATION('%',1)), \
+                Fst::NODE())

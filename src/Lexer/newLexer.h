@@ -38,7 +38,8 @@ enum TokenType {
     condition,
     loop,
     less,
-    greater
+    greater,
+    mod
 };
 
 enum ValueType {
@@ -75,7 +76,7 @@ struct Identifier {
     }
 };
 
-const std::string tokenTypes = " ;{}()[]vvvv,=ittmlrfdput:?@vv";
+const std::string tokenTypes = " ;{}()[]vvvv,=ittmlrfdput:?@vvv";
 
 struct Token {
   TokenType type;

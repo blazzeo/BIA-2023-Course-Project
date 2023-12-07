@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/ivanbraganets/kursovoy/src/Error/Error.cpp" "CMakeFiles/main.dir/src/Error/Error.cpp.o" "gcc" "CMakeFiles/main.dir/src/Error/Error.cpp.o.d"
+  "/Users/ivanbraganets/kursovoy/src/Generation/Gen.cpp" "CMakeFiles/main.dir/src/Generation/Gen.cpp.o" "gcc" "CMakeFiles/main.dir/src/Generation/Gen.cpp.o.d"
   "/Users/ivanbraganets/kursovoy/src/In/In.cpp" "CMakeFiles/main.dir/src/In/In.cpp.o" "gcc" "CMakeFiles/main.dir/src/In/In.cpp.o.d"
   "/Users/ivanbraganets/kursovoy/src/Lexer/newLexer.cpp" "CMakeFiles/main.dir/src/Lexer/newLexer.cpp.o" "gcc" "CMakeFiles/main.dir/src/Lexer/newLexer.cpp.o.d"
   "/Users/ivanbraganets/kursovoy/src/Log/Log.cpp" "CMakeFiles/main.dir/src/Log/Log.cpp.o" "gcc" "CMakeFiles/main.dir/src/Log/Log.cpp.o.d"

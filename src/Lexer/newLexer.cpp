@@ -14,7 +14,7 @@
 
 const std::string SEPARATORS = " /:;=*,+-(){}<>\t";
 std::vector<Fst::CHAIN> vectorOfChains = {STR_LITER, MAIN, INT_LITER, BOOL_LITER, RETURN, FUNCTION, PRINT, DECLARE, LITER, IF, FOR, IDENTIFIER};
-std::vector<Fst::CHAIN> vectorOfSeparators = {DIV, SEMI, CLOSE_APP_BRACKET, OPEN_APP_BRACKET, OPEN_PARM_BRACKET, CLOSE_PARM_BRACKET, SUM, COLON, SUB, COMMA, MULTIPLY, LESS, GREATER, EQUALS};
+std::vector<Fst::CHAIN> vectorOfSeparators = {DIV, SEMI, CLOSE_APP_BRACKET, OPEN_APP_BRACKET, OPEN_PARM_BRACKET, CLOSE_PARM_BRACKET, SUM, COLON, SUB, COMMA, MULTIPLY, MOD, LESS, GREATER, EQUALS};
 
 namespace Lexer {
 void checkLexem(Table& table, std::string word,

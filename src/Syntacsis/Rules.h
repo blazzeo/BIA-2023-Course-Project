@@ -23,7 +23,7 @@ namespace GRB
        }
 		),
 		Rule(NS('N'), GRB_ERROR_SERIES + 1,			//Операторы программы
-			14, 	//N	→	di:t; | rE; | i = E; | fi:t(F); | di:t;N | rE;N | i=E;N | fi:t(F);N | pE; | pE;N | ?(E){N}; | @(E){N};
+			14, 	//N	→	di:t; | rE; | i = E; | fi:t(F); | di:t;N | rE;N | i=E;N | fi:t(F);N | pE; | pE;N | ?(E){N}; | @(Z){N};
        {
 			Rule::Chain(5, { TS('d'), TS('i'), TS(':'), TS('t'), TS(';')}),
 			Rule::Chain(4, { TS('i'), TS('='), NS('E'), TS(';')}),
