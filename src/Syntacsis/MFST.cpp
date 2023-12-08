@@ -229,7 +229,7 @@ namespace MFST
 		{
 			errid = grebach.getRule(diagnosis[n].nrule).iderror;
 			Error::ERROR err = Error::geterror(errid);
-			snprintf(buf, MFST_DIAGN_MAXSIZE, "%d: строка %d,%s", err.id, lex.tokens[lpos].lineNum, err.message);
+			snprintf(buf, MFST_DIAGN_MAXSIZE, "%d: строка %d,%s", err.id, lex.tokens[lpos].lineNum+1, err.message);
 			rc = buf;
 		}
 		return rc;
@@ -262,4 +262,8 @@ namespace MFST
 		}
 		return true;
 	};
+
+  // void Mfst::buildTree() {
+  //   for(auto rule : )
+  // }
 }

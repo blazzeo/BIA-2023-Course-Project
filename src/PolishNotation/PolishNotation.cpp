@@ -30,23 +30,36 @@ map<Lexer::TokenType, char> operators = {
   {Lexer::div, '/'},
 };
 
-bool checkNotation(Lexer::Table &table, int id) {
+Lexer::ValueType checkNotation(Lexer::Table &table, int id) {
   bool fnFlag = false;
   string result{};
   queue<Lexer::Token> queue;
   stack<Lexer::Token> stack;
+  Lexer::ValueType returnType = Lexer::undef;
   int start = id, end = id;
   Lexer::Token token = table.tokens[id];
   do {
     switch (table.tokens[id].type) {
       case Lexer::identifier: {
         if (table.tokens[id].identifier->isFunc) {
+          if(returnType == Lexer::undef) {
+            returnType = table.tokens[id].identifier->type;
+          } else {
+            if (returnType != table.tokens[id].identifier->type)
+              return Lexer::undef;
+          }
           fnFlag = true;
           stack.push(table.tokens[id]);
         } else {
           if (fnFlag) {
             stack.push(table.tokens[id]);
           } else {
+            if(returnType == Lexer::undef) {
+              returnType = table.tokens[id].identifier->type;
+            } else {
+              if (returnType != table.tokens[id].identifier->type)
+                return Lexer::undef;
+            }
             result += table.tokens[id].identifier->name;
             queue.push(table.tokens[id]);
             result += ' ';
@@ -90,7 +103,7 @@ bool checkNotation(Lexer::Table &table, int id) {
       case Lexer::close_parm_brackets: {
         do {
           if (stack.empty())
-            return false;
+            return Lexer::undef;
           if (stack.top().type != Lexer::open_parm_brackets) {
             if (stack.top().type == Lexer::identifier) {
               result += stack.top().identifier->name;
@@ -133,7 +146,7 @@ bool checkNotation(Lexer::Table &table, int id) {
   }
   cout << "Result: " << result << endl;
 
-  printTable(table, start - 3, end + 3);
+  printTable(table, start - 2, end + 2);
   size_t quSize = queue.size();
   for (size_t i = start; i < end - quSize; i++) {
     if (!queue.empty()) {
@@ -143,6 +156,6 @@ bool checkNotation(Lexer::Table &table, int id) {
   }
   for (size_t i = end - quSize, j = end - quSize; i < end; i++)
       table.tokens.erase(table.tokens.begin()+j);
-  printTable(table, start - 3, end + 3);
-  return true;
+  printTable(table, start - 2, end + 2);
+  return returnType;
 }

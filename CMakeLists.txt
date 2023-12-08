@@ -21,4 +21,5 @@ add_executable(main
     src/Syntacsis/MFST.cpp
     src/Semantics/Sem.cpp
     src/Generation/Gen.cpp
+    src/PolishNotation/PolishNotation.cpp
 )

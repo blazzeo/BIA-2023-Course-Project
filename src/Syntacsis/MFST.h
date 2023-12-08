@@ -116,7 +116,8 @@ namespace MFST
 		RC_STEP step();					
 		bool start();				
 		bool savediagnosis(RC_STEP pprc_step);
-		void printrules();				
+		void printrules();
+    void buildTree();
 
 		struct Deducation
 		{

@@ -383,3 +383,11 @@ Fst::RELATION('9',1)),\
 #define MOD Fst::CHAIN(2, Lexer::mod, \
                 Fst::NODE(1, Fst::RELATION('%',1)), \
                 Fst::NODE())
+#define EQUAL Fst::CHAIN(3, Lexer::equal, \
+                Fst::NODE(1, Fst::RELATION('=',1)), \
+                Fst::NODE(1, Fst::RELATION('=',2)), \
+                Fst::NODE())
+#define NEQUAL Fst::CHAIN(3, Lexer::nequal, \
+                Fst::NODE(1, Fst::RELATION('!',1)), \
+                Fst::NODE(1, Fst::RELATION('=',2)), \
+                Fst::NODE())

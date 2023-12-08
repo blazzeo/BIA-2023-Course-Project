@@ -39,7 +39,9 @@ enum TokenType {
     loop,
     less,
     greater,
-    mod
+    mod,
+    equal,
+    nequal
 };
 
 enum ValueType {
@@ -61,7 +63,7 @@ struct Identifier {
     {
         switch(tp) {
             case i:
-                value = 0;
+                value = (int)0;
                 break;
             case str:
                 value = "";
@@ -83,7 +85,7 @@ struct Token {
   unsigned short lineNum;
   char lexema = ' ';
   std::shared_ptr<Identifier> identifier = nullptr;
-  std::optional<std::string> value;
+  std::string value;
 
   Token() : type(undefined), lineNum(-1) {}
   Token(TokenType tp, short ln, std::string val = "")

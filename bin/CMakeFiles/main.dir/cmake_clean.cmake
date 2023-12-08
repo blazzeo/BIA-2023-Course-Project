@@ -13,6 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/src/Out/Out.cpp.o.d"
   "CMakeFiles/main.dir/src/Parm/Parm.cpp.o"
   "CMakeFiles/main.dir/src/Parm/Parm.cpp.o.d"
+  "CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.o"
+  "CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.o.d"
   "CMakeFiles/main.dir/src/Semantics/Sem.cpp.o"
   "CMakeFiles/main.dir/src/Semantics/Sem.cpp.o.d"
   "CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.o"

@@ -15,6 +15,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/ivanbraganets/kursovoy/src/Log/Log.cpp" "CMakeFiles/main.dir/src/Log/Log.cpp.o" "gcc" "CMakeFiles/main.dir/src/Log/Log.cpp.o.d"
   "/Users/ivanbraganets/kursovoy/src/Out/Out.cpp" "CMakeFiles/main.dir/src/Out/Out.cpp.o" "gcc" "CMakeFiles/main.dir/src/Out/Out.cpp.o.d"
   "/Users/ivanbraganets/kursovoy/src/Parm/Parm.cpp" "CMakeFiles/main.dir/src/Parm/Parm.cpp.o" "gcc" "CMakeFiles/main.dir/src/Parm/Parm.cpp.o.d"
+  "/Users/ivanbraganets/kursovoy/src/PolishNotation/PolishNotation.cpp" "CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.o" "gcc" "CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.o.d"
   "/Users/ivanbraganets/kursovoy/src/Semantics/Sem.cpp" "CMakeFiles/main.dir/src/Semantics/Sem.cpp.o" "gcc" "CMakeFiles/main.dir/src/Semantics/Sem.cpp.o.d"
   "/Users/ivanbraganets/kursovoy/src/Syntacsis/GRB.cpp" "CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.o" "gcc" "CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.o.d"
   "/Users/ivanbraganets/kursovoy/src/Syntacsis/MFST.cpp" "CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o" "gcc" "CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o.d"

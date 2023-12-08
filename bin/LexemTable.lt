@@ -1,0 +1,123 @@
+---------------- LexemTable -----------------
+           Type     Lexem   LineNum     Value
+             fn         f         0
+     Identifier         i         0
+          Colon         :         0
+            i32         t         0
+      Open Parm         (         0
+     Identifier         i         0
+          Colon         :         0
+            i32         t         0
+     Close Parm         )         0
+   Open Bracket         {         0
+         return         r         1
+     Identifier         i         1
+              *         v         1
+     Identifier         i         1
+              ;         ;         1
+  Close Bracket         }         2
+              ;         ;         2
+           main         m         4
+          Colon         :         4
+            i32         t         4
+   Open Bracket         {         4
+            let         d         5
+     Identifier         i         5
+          Colon         :         5
+            i32         t         5
+              ;         ;         5
+     Identifier         i         6
+              =         =         6
+        Literal         l         6        15
+              ;         ;         6
+            let         d         7
+     Identifier         i         7
+          Colon         :         7
+            i32         t         7
+              ;         ;         7
+     Identifier         i         8
+              =         =         8
+        Literal         l         8         2
+              *         v         8
+      Open Parm         (         8
+     Identifier         i         8
+      Open Parm         (         8
+        Literal         l         8        20
+     Close Parm         )         8
+              +         v         8
+        Literal         l         8         4
+     Close Parm         )         8
+              ;         ;         8
+          print         p         9
+     Identifier         i         9
+              ;         ;         9
+            let         d        10
+     Identifier         i        10
+          Colon         :        10
+         string         t        10
+              ;         ;        10
+     Identifier         i        11
+              =         =        11
+        Literal         l        11     54321
+              ;         ;        11
+            let         d        12
+     Identifier         i        12
+          Colon         :        12
+           bool         t        12
+              ;         ;        12
+     Identifier         i        13
+              =         =        13
+        Literal         l        13         1
+              ;         ;        13
+             if         ?        14
+      Open Parm         (        14
+     Identifier         i        14
+     Close Parm         )        14
+   Open Bracket         {        15
+            let         d        16
+     Identifier         i        16
+          Colon         :        16
+            i32         t        16
+              ;         ;        16
+     Identifier         i        17
+              =         =        17
+     Identifier         i        17
+      Open Parm         (        17
+     Identifier         i        17
+     Close Parm         )        17
+              ;         ;        17
+             if         ?        18
+      Open Parm         (        18
+     Identifier         i        18
+              =         =        18
+              =         =        18
+        Literal         l        18        10
+     Close Parm         )        18
+   Open Bracket         {        19
+          print         p        20
+     Identifier         i        20
+              ;         ;        20
+  Close Bracket         }        21
+              ;         ;        21
+          print         p        22
+        Literal         l        22length is less than 10
+              ;         ;        22
+  Close Bracket         }        23
+              ;         ;        23
+            let         d        24
+     Identifier         i        24
+          Colon         :        24
+            i32         t        24
+              ;         ;        24
+     Identifier         i        25
+              =         =        25
+     Identifier         i        25
+      Open Parm         (        25
+     Identifier         i        25
+     Close Parm         )        25
+              ;         ;        25
+         return         r        26
+        Literal         l        26         0
+              ;         ;        26
+  Close Bracket         }        27
+              ;         ;        27

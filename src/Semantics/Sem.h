@@ -17,6 +17,7 @@ struct Scope {
     std::vector<Lexer::Identifier> parms;
     Scope* prevScope = nullptr;
     std::vector<Scope> nextScopes;
+    std::vector<Lexer::Token> innerCode;
 };
 
 Scope scopenize(Lexer::Table*, int&, Scope* = nullptr);

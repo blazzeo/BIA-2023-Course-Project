@@ -8,28 +8,28 @@
 
 namespace GRB
 {
-	Rule::Chain::Chain(short psize, std::vector<GRBALPHABET> vec)
+	Rule::Chain::Chain(std::vector<GRBALPHABET> vec)
 	{
-		this->nt = new GRBALPHABET[this->size = psize];
+		this->nt = new GRBALPHABET[this->size = vec.size()];
 
-		for (int i = 0; i < psize; i++)
+		for (int i = 0; i < this->size; i++)
             this->nt[i] = vec[i];
 	}
 
-	Rule::Rule(GRBALPHABET pnn, int iderroe, short psize, std::vector<Chain> vec)
+	Rule::Rule(GRBALPHABET pnn, int iderroe, std::vector<Chain> vec)
 	{
 		this->nn = pnn;
 		this->iderror = iderroe;
-		this->chains = new Chain[this->size = psize];
-		for (int i = 0; i < psize; i++)
+		this->chains = new Chain[this->size = vec.size()];
+		for (int i = 0; i < this->size; i++)
 			this->chains[i] = vec[i];
 	}
-	Greibach::Greibach(GRBALPHABET pstartN, GRBALPHABET pstbottomT, short psize, std::vector<Rule> vec)
+	Greibach::Greibach(GRBALPHABET pstartN, GRBALPHABET pstbottomT, std::vector<Rule> vec)
 	{
 		this->startN = pstartN;
 		this->stbottomT = pstbottomT;
-		this->rules = new Rule[this->size = psize];
-		for (int i = 0; i < psize; i++)
+		this->rules = new Rule[this->size = vec.size()];
+		for (int i = 0; i < this->size; i++)
 			rules[i] = vec[i];
 	}
 

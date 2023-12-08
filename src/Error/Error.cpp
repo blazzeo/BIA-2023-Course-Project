@@ -11,7 +11,7 @@ namespace Error {
   //  100-199 Ошибки праметров
     ERROR_ENTRY(100, "Параметр -in должен быть задан"),
     ERROR_ENTRY_NODEF(101), ERROR_ENTRY_NODEF(102), ERROR_ENTRY_NODEF(103),
-    ERROR_ENTRY(104, "Превышена длина входного пармаетра"),
+    ERROR_ENTRY(104, "Превышена длина входного параметра"),
     ERROR_ENTRY_NODEF(105), ERROR_ENTRY_NODEF(106), ERROR_ENTRY_NODEF(107), ERROR_ENTRY_NODEF(108), ERROR_ENTRY_NODEF(109),
     ERROR_ENTRY(110, "Ошибка при открытии файла с исходным кодом (-in)"),
     ERROR_ENTRY(111, "Недопустимый символ в исходном файле (-in)"),
@@ -31,7 +31,7 @@ namespace Error {
   ERROR_ENTRY(400, "Невозможно применить оператор к данному типу операнда"), ERROR_ENTRY(401, "Тип возвращаемого значения не соответствует типу функции"), ERROR_ENTRY(402, "Использована необъявленная переменная"), ERROR_ENTRY(403, "Повторное объявление имени"), ERROR_ENTRY(404, "Функция должна возвращать значение"), ERROR_ENTRY(405, "Ошибка в условии условного оператора"), ERROR_ENTRY(406, "Несовпадение фактических и формальных параметров функции"), ERROR_ENTRY(407, "Несоответсвие типов в выражении"), ERROR_ENTRY_NODEF(408), ERROR_ENTRY_NODEF(409), ERROR_ENTRY_NODEF10(410), ERROR_ENTRY_NODEF10(420), ERROR_ENTRY_NODEF10(430), ERROR_ENTRY_NODEF10(440), ERROR_ENTRY_NODEF10(450), ERROR_ENTRY_NODEF10(460), ERROR_ENTRY_NODEF10(470), ERROR_ENTRY_NODEF10(480), ERROR_ENTRY_NODEF10(490),
   ERROR_ENTRY_NODEF100(500),
   //  600-699 Ошибки синтаксического анализа
-  ERROR_ENTRY(600, "Неверная структура программы"),ERROR_ENTRY(601, "Ошибочный оператор"),ERROR_ENTRY(602, "Ошибка в выражении"),ERROR_ENTRY(603, "Ошибка в операторах функции"),ERROR_ENTRY(604, "Ошибка в параметрах вызываемой функции"),ERROR_ENTRY(605,"Значением данного оператора может быть только переменная или литерал"),ERROR_ENTRY(606,"Ошибка в условии условного оператора"),ERROR_ENTRY_NODEF(607),ERROR_ENTRY_NODEF(608),ERROR_ENTRY_NODEF(609),ERROR_ENTRY_NODEF10(610),ERROR_ENTRY_NODEF10(620),ERROR_ENTRY_NODEF10(630),ERROR_ENTRY_NODEF10(640),ERROR_ENTRY_NODEF10(650),ERROR_ENTRY_NODEF10(660),ERROR_ENTRY_NODEF10(670),ERROR_ENTRY_NODEF10(680),ERROR_ENTRY_NODEF10(690),
+  ERROR_ENTRY(600, "Неверная структура программы"),ERROR_ENTRY(601, "Ошибочный оператор"),ERROR_ENTRY(602, "Ошибка в выражении"),ERROR_ENTRY(603, "Ошибка в операторах функции"),ERROR_ENTRY(604, "Ошибка в параметрах вызываемой функции"),ERROR_ENTRY(605,"Значением данного оператора может быть только переменная или литерал"),ERROR_ENTRY(606,"Ошибка в условии условного оператора"),ERROR_ENTRY(607, "M Error"),ERROR_ENTRY(608, "Ошибка в условии цикла"),ERROR_ENTRY_NODEF(609),ERROR_ENTRY_NODEF10(610),ERROR_ENTRY_NODEF10(620),ERROR_ENTRY_NODEF10(630),ERROR_ENTRY_NODEF10(640),ERROR_ENTRY_NODEF10(650),ERROR_ENTRY_NODEF10(660),ERROR_ENTRY_NODEF10(670),ERROR_ENTRY_NODEF10(680),ERROR_ENTRY_NODEF10(690),
   ERROR_ENTRY_NODEF100(700),
   ERROR_ENTRY_NODEF100(800),
   ERROR_ENTRY_NODEF100(900)

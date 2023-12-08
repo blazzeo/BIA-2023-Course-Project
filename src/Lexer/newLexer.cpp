@@ -5,8 +5,13 @@
 #include "newLexer.h"
 #include <cstdlib>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <cstring>
+#include <ostream>
+#include <string>
+#include <variant>
+#include <format>
 
 #define NEWLINE '\n'
 #define STR '\''
@@ -14,12 +19,13 @@
 
 const std::string SEPARATORS = " /:;=*,+-(){}<>\t";
 std::vector<Fst::CHAIN> vectorOfChains = {STR_LITER, MAIN, INT_LITER, BOOL_LITER, RETURN, FUNCTION, PRINT, DECLARE, LITER, IF, FOR, IDENTIFIER};
-std::vector<Fst::CHAIN> vectorOfSeparators = {DIV, SEMI, CLOSE_APP_BRACKET, OPEN_APP_BRACKET, OPEN_PARM_BRACKET, CLOSE_PARM_BRACKET, SUM, COLON, SUB, COMMA, MULTIPLY, MOD, LESS, GREATER, EQUALS};
+std::vector<Fst::CHAIN> vectorOfSeparators = {DIV, SEMI, CLOSE_APP_BRACKET, OPEN_APP_BRACKET, OPEN_PARM_BRACKET, CLOSE_PARM_BRACKET, SUM, COLON, SUB, COMMA, MULTIPLY, MOD, LESS, GREATER, EQUALS, EQUAL, NEQUAL};
 
 namespace Lexer {
 void checkLexem(Table& table, std::string word,
                 std::vector<Fst::CHAIN> chains, size_t lineNum)
 {
+  std::cout << word << std::endl;
   static short identId = 0;
   static bool funcType = false;
 
@@ -39,30 +45,26 @@ void checkLexem(Table& table, std::string word,
           Token token(chain.type, lineNum);
           table.tokens.push_back(token);
           table.identifiers.back()->type = i;
-          table.tokens[identId-1].identifier->type = i;
+          table.identifiers.back()->value = 0;
           break;
         }
         case 16: {  //      STRING FLAG
           Token token(chain.type, lineNum);
           table.tokens.push_back(token);
           table.identifiers.back()->type = str;
-          table.tokens[identId-1].identifier->type = str;
+          table.identifiers.back()->value = "";
           break;
         }
         case 24: {  //      BOOL FLAG
-          // Token token(chain.type, lineNum);
-          // table.tokens.push_back(token);
-          // table.identifiers.back()->type = bol;
-          // table.tokens[identId-1].identifier->type = bol;
-          // break;
-          std::shared_ptr<Identifier> ident(new Identifier(word, i, 1));
-          Token token(chain.type, lineNum, ident);
-          table.identifiers.push_back(ident);
+          Token token(chain.type, lineNum);
           table.tokens.push_back(token);
+          table.identifiers.back()->type = bol;
+          table.identifiers.back()->value = false;
           break;
         }
         case 14: { //      IDENTIFIER
-          std::shared_ptr<Identifier> ident(new Identifier(word, undef));
+          std::shared_ptr<Identifier> ident(new Identifier(word, undef, funcType));
+          funcType = false;
           table.identifiers.push_back(ident);
           Token token(chain.type, lineNum, ident);
           table.tokens.push_back(token);
@@ -70,6 +72,13 @@ void checkLexem(Table& table, std::string word,
         }
         case 18: {  //      LITERAL
           Token token(chain.type, lineNum, word);
+          table.tokens.push_back(token);
+          break;
+        }
+        case 17: { //       MAIN
+          std::shared_ptr<Identifier> ident(new Identifier(word, i, 1));
+          Token token(chain.type, lineNum, ident);
+          table.identifiers.push_back(ident);
           table.tokens.push_back(token);
           break;
         }
@@ -134,24 +143,79 @@ Table tokenize(In::IN &in) {
   return table;
 }
 
+std::string tokens[33] = {
+  "SPACE",
+  ";",
+  "Open Bracket",
+  "Close Bracket",
+  "Open Parm",
+  "Close Parm",
+  "Open Priority",
+  "Close Priority",
+  "+",
+  "*",
+  "\\",
+  "-",
+  ",",
+  "=",
+  "Identifier",
+  "i32",
+  "string",
+  "main",
+  "Literal",
+  "return",
+  "fn",
+  "let",
+  "print",
+  "Undefined",
+  "bool",
+  "Colon",
+  "if",
+  "for",
+  "<",
+  ">",
+  "%",
+  "==",
+  "!="
+};
+
+struct PRNT {
+  std::string operator()(std::string value){
+    return value;
+  }
+  std::string operator()(bool value){
+    return std::to_string(value);
+  }
+  std::string operator()(int value){
+    return std::to_string(value);
+  }
+};
+
 void generateLog(Table &table) {
   std::ofstream it("IdentifierTable.it");
   if (it.is_open()) {
-    it << "-------- IdentifierTable ---------" << std::endl;
+    it << "------------- IdentifierTable ---------------" << std::endl;
+    it << std::setw(15) << "Name" << std::setw(10) << "DataType" << std::setw(10) << "Value" << std::setw(10) << "IsFunc" << std::endl;
     for (auto ident : table.identifiers) {
-      it << ident->name << "\t";
+      std::string st = std::visit(PRNT(), ident->value);
+      it << std::setw(15) << ident->name;
       switch (ident->type) {
-        case i:
-          it << "int\t" << std::get<int>(ident->value) << (ident->isFunc?"func\n":"\n");
+        case i: {
+          it << std::setw(10) << "i32" << std::setw(10) << st;
+          it << std::setw(10) << (ident->isFunc?"Func\n":"\n");
           break;
+        }
         case str:
-          it << "str\t" << std::get<std::string>(ident->value) << (ident->isFunc?"func\n":"\n");
+          it << std::setw(10) << "string" << std::setw(10) << st;
+          it << std::setw(10) << (ident->isFunc?"Func\n":"\n");
           break;
         case bol:
-          it << "bool\t" << std::get<bool>(ident->value) << (ident->isFunc?"func\n":"\n");
+          it << std::setw(10) << "bool" << std::setw(10) << st;
+          it << std::setw(10) << (ident->isFunc?"Func\n":"\n");
           break;
         default:
-          it << "undef\t" << std::endl;
+          it << std::setw(10) << "undef" << std::setw(10) << st;
+          it << std::setw(10) << (ident->isFunc?"Func\n":"\n");
           break;
       }
     }
@@ -159,9 +223,12 @@ void generateLog(Table &table) {
   it.close();
   std::ofstream lt("LexemTable.lt");
   if (lt.is_open()) {
-    lt << "-------- LexemTable ---------" << std::endl;
+    lt << "---------------- LexemTable -----------------" << std::endl;
+    lt << std::setw(15) << "Type" << std::setw(10) << "Lexem" << std::setw(10) << "LineNum" << std::setw(10) << "Value" << std::endl;
     for (auto token : table.tokens) {
-      lt << token.type << '\t' << token.lexema << '\t' << token.lineNum << std::endl;
+      lt << std::setw(15) << tokens[token.type] << std::setw(10) << token.lexema << std::setw(10) << token.lineNum;
+      if(token.type == liter) lt << std::setw(10) << token.value;
+      lt << std::endl;
     }
   } else Error::geterror(203);
   lt.close();

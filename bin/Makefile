@@ -297,6 +297,30 @@ src/Parm/Parm.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Parm/Parm.cpp.s
 .PHONY : src/Parm/Parm.cpp.s
 
+src/PolishNotation/PolishNotation.o: src/PolishNotation/PolishNotation.cpp.o
+.PHONY : src/PolishNotation/PolishNotation.o
+
+# target to build an object file
+src/PolishNotation/PolishNotation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.o
+.PHONY : src/PolishNotation/PolishNotation.cpp.o
+
+src/PolishNotation/PolishNotation.i: src/PolishNotation/PolishNotation.cpp.i
+.PHONY : src/PolishNotation/PolishNotation.i
+
+# target to preprocess a source file
+src/PolishNotation/PolishNotation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.i
+.PHONY : src/PolishNotation/PolishNotation.cpp.i
+
+src/PolishNotation/PolishNotation.s: src/PolishNotation/PolishNotation.cpp.s
+.PHONY : src/PolishNotation/PolishNotation.s
+
+# target to generate assembly for a file
+src/PolishNotation/PolishNotation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.s
+.PHONY : src/PolishNotation/PolishNotation.cpp.s
+
 src/Semantics/Sem.o: src/Semantics/Sem.cpp.o
 .PHONY : src/Semantics/Sem.o
 
@@ -471,6 +495,9 @@ help:
 	@echo "... src/Parm/Parm.o"
 	@echo "... src/Parm/Parm.i"
 	@echo "... src/Parm/Parm.s"
+	@echo "... src/PolishNotation/PolishNotation.o"
+	@echo "... src/PolishNotation/PolishNotation.i"
+	@echo "... src/PolishNotation/PolishNotation.s"
 	@echo "... src/Semantics/Sem.o"
 	@echo "... src/Semantics/Sem.i"
 	@echo "... src/Semantics/Sem.s"

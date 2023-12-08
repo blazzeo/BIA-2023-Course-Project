@@ -19,7 +19,7 @@ namespace GRB
 				this->size = 0; 				//количество символов в цепочке
 				this->nt = 0;					//символы (терминал или нетерминал)
 			};
-			Chain(short psize, std::vector<GRBALPHABET>);						//кол-во символов в цепочке/символы(терминалы и нетерминалы)
+			Chain(std::vector<GRBALPHABET>);						//кол-во символов в цепочке/символы(терминалы и нетерминалы)
 			char* getCChain(char* b);									//получить правую сторону правила
 			static GRBALPHABET T(char t) { return GRBALPHABET(t); };	//терминал
 			static GRBALPHABET N(char n) { return -GRBALPHABET(n); };	//не терминал
@@ -35,7 +35,7 @@ namespace GRB
 			this->nn = 0x00;
 			this->size = 0;
 		}
-		Rule(GRBALPHABET pnn, int iderroe, short psize, std::vector<Chain>);
+		Rule(GRBALPHABET pnn, int iderroe, std::vector<Chain>);
 		//(нетерминал(< 0); идентификатор диагностического сообщ - я; кол - во цепочек - правых частей правила; множество цепочек - правых частей правила)
 		char* getCRule(char* b, short nchain); //получить парвило в виде N->цепочка (для распечатки) (буфер;номер цепочки(правой части) в правиле)
 		short getNextChain(GRBALPHABET t, Rule::Chain& pchain, short j); //получить следующую за j подходящую цепочку, вернуть её номер или -1 (первый символ цепочки;возвращаемая цепочка; номер цепочки)
@@ -47,7 +47,7 @@ namespace GRB
 		GRBALPHABET stbottomT;			//дно стека
 		Rule* rules;					//множество правил
 		Greibach() { this->size = 0; this->startN = 0; this->stbottomT = 0; this->rules = 0; };
-		Greibach(GRBALPHABET pstartN, GRBALPHABET pstbottomT, short psize, std::vector<Rule>);
+		Greibach(GRBALPHABET pstartN, GRBALPHABET pstbottomT, std::vector<Rule>);
 		short getRule(GRBALPHABET pnn, Rule& prule);
 		Rule getRule(short n);
 	};
