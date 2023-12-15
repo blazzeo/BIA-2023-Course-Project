@@ -1,7 +1,7 @@
 #pragma once
 #include "stack"
 #include "GRB.h"
-// #include "ios"
+#include "ios"
 #include "iomanip"
 #include "stdio.h"
 #include "iostream"
@@ -20,12 +20,10 @@ public:
 static int FST_TRACE_n = -1;
 static char rbuf[205], sbuf[205], lbuf[1024];
 
-
-
-#define MFST_TRACE_START cout<< endl << setw(4)<<left<< "Шаг" <<":"\
-								  << setw(20)<<left<<" Правило"\
-								  << setw(30)<<left<<" Входная лента"\
-								  << setw(20)<<left<<" Стек"\
+#define MFST_TRACE_START cout<< endl << setw(4)<<left<< "Step" <<":"\
+								  << setw(20)<<left<<" Rule"\
+								  << setw(30)<<left<<" Input tape"\
+								  << setw(20)<<left<<" Stack"\
 								  << endl;
 
 #define MFST_TRACE1		 cout<< setw(4)<<left<<++FST_TRACE_n<<": "\

@@ -1,5 +1,4 @@
 #include "Syntacsis/GRB.h"
-#include "WCHAR/WCHAR.h"
 #include "Error/Error.h"
 #include "Log/Log.h"
 #include "Out/Out.h"
@@ -10,20 +9,12 @@
 #include "Semantics/Sem.h"
 #include "Syntacsis/MFST.h"
 
-#include <vector>
 #include <iostream>
 
 int main(int argc, char* argv[]) {
-    setlocale(LC_ALL, "en_US.UTF-8");
-    std::wcout.imbue(std::locale("en_US.UTF-8"));
-    std::vector<wchar_t*> wargv = {};
-
-    for (int i{}; i < argc; ++i)
-        wargv.push_back(getWC(argv[i]));
     Out::OUT out;
-
     try {
-        Parm::PARM parm = Parm::getparm(argc, wargv.data());
+        Parm::PARM parm = Parm::getparm(argc, argv);
         out = Out::getOut(parm.out);
         Log::LOG log = Log::getlog(parm.log);
         Log::WriteLog(log);
@@ -44,7 +35,7 @@ int main(int argc, char* argv[]) {
         Sem::Scope structure = Sem::scopenize(&table, i);
         Sem::PrintTable(structure);
     // // GENERATION
-    Gen::GenerateAsm(structure, table);
+        Gen::GenerateAsm(structure, table);
         Out::WriteOut(out, table);
         Log::WriteIn(log, in);
         Log::Close(log);
@@ -54,11 +45,9 @@ int main(int argc, char* argv[]) {
         //     Out::WriteError(out, e);
         //     return 1;
         // } else {
-            wchar_t* msg { getWC(e.message)};
-            std::wcout << L"Ошибка " << e.id << L": " << msg << L'\n' << std::endl;
-            std::wcout << L"строка " << e.inext.line+1
-                << L"\tпозииция " << e.inext.col << "\n\n";
-            delete[] msg;
+            std::cout << "Error " << e.id << ": " << e.message << '\n' << std::endl;
+            std::cout << "line " << e.inext.line+1
+                << "\tposition " << e.inext.col << "\n\n";
             return 1;
         // }
     }

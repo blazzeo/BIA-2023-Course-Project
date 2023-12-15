@@ -3,46 +3,43 @@
 #include "../Parm/Parm.h"
 #include "../Out/Out.h"
 #include "iostream"
-#include <vector>
 
 namespace Out {
-OUT getOut(wchar_t* w_outfile) {
-    char* filename = getCH(w_outfile); 
-    OUT out;
-    wcscpy(out.outfile, w_outfile);
-    out.stream = new std::ofstream(filename);
-    if (!out.stream && !out.stream->is_open()) {
-        throw ERROR_THROW(112);
-    }
-    return out;
+OUT getOut(char* outfile) {
+  char* filename = outfile; 
+  OUT out;
+  strcpy(out.outfile, outfile);
+  out.stream = new std::ofstream(filename);
+  if (!out.stream && !out.stream->is_open()) {
+    throw ERROR_THROW(112);
+  }
+  return out;
 
 }
 void WriteError(OUT out, Error::ERROR e) {
-    const char* err_mes = e.error_line.c_str();
-    if (out.stream && out.stream->is_open()) {
-        *out.stream << "Ошибка " << e.id << ": " << e.message <<
-            ", строка " << e.inext.line <<
-            ", позиция " << e.inext.col << std::endl <<
-            e.inext.line << '\t' << err_mes << std::endl << std::endl;
-    } else {
-        std::cout << "Ошибка " << e.id << ": " << e.message <<
-            ", строка " << e.inext.line <<
-            ", позиция " << e.inext.col << std::endl << 
-            e.inext.line << '\t' << err_mes << std::endl << std::endl;
-    }
+  const char* err_mes = e.error_line.c_str();
+  if (out.stream && out.stream->is_open()) {
+    *out.stream << "Error " << e.id << ": " << e.message <<
+      ", line " << e.inext.line <<
+      ", position " << e.inext.col << std::endl <<
+      e.inext.line << '\t' << err_mes << std::endl << std::endl;
+  } else {
+    std::cout << "Error " << e.id << ": " << e.message <<
+      ", line " << e.inext.line <<
+      ", position " << e.inext.col << std::endl << 
+      e.inext.line << '\t' << err_mes << std::endl << std::endl;
+  }
 }
 
 void WriteOut(OUT out, Lexer::Table table) {
-    if (out.stream && out.stream->is_open()) {
-        int lineNum = -1;
-        for (auto token : table.tokens) {
-            if (lineNum != token.lineNum)
-                *out.stream << std::endl << ++lineNum << '\t';
-            *out.stream << token.lexema;
-        }
-        *out.stream << std::endl;
+  if (out.stream && out.stream->is_open()) {
+    int lineNum = -1;
+    for (auto token : table.tokens) {
+      if (lineNum != token.lineNum)
+        *out.stream << std::endl << ++lineNum << '\t';
+      *out.stream << token.lexema;
     }
+    *out.stream << std::endl;
+  }
 }
-
 }
-

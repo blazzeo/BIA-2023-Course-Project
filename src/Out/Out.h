@@ -7,11 +7,11 @@
 
 namespace Out {
 struct OUT {
-    wchar_t outfile[PARM_MAX_SIZE];
+    char outfile[PARM_MAX_SIZE];
     std::ofstream* stream;
 };
 
-OUT getOut(wchar_t outfile[]);
+OUT getOut(char outfile[]);
 void WriteError(OUT out, Error::ERROR err);
 void WriteOut(OUT out, Lexer::Table);
 };

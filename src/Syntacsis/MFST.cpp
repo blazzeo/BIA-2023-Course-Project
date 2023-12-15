@@ -159,8 +159,8 @@ namespace MFST
             {
                 MFST_TRACE4("------>LENTA_END")
                 std::cout << "------------------------------------------------------------------------------------------   ------" << std::endl;
-                snprintf(buf, MFST_DIAGN_MAXSIZE, "%d: всего строк %d, синтаксический анализ выполнен без ошибок", 0, lex.tokens[lex.tokens.size() - 1].lineNum);
-                std::cout << std::setw(4) << std::left << 0 << ": всего строк " << lex.tokens[lex.tokens.size() - 1].lineNum << ", синтаксический анализ выполнен без ошибок" << std::endl;
+                snprintf(buf, MFST_DIAGN_MAXSIZE, "%d: total lines %d, parsing completed without errors", 0, lex.tokens[lex.tokens.size() - 1].lineNum);
+                std::cout << std::setw(4) << std::left << 0 << ": total lines " << lex.tokens[lex.tokens.size() - 1].lineNum << ", parsing completed without errors" << std::endl;
                 rc = true;
                 break;
         }
@@ -169,9 +169,7 @@ namespace MFST
             {
                 MFST_TRACE4("------>NS_NORULE")
                 std::cout << "-----------------------------------------------------------------------------------------------" << std::endl;
-                std::cout << "!@#" << std::endl;
                 std::cout << getDiagnosis(0, buf) << std::endl;
-                std::cout << "!@#" << std::endl;
                 std::cout << getDiagnosis(1, buf) << std::endl;
                 std::cout << getDiagnosis(2, buf) << std::endl;
                 break;
@@ -179,17 +177,14 @@ namespace MFST
 
         case NS_NORULECHAIN:
         {
-                std::cout << "1" << std::endl;
             MFST_TRACE4("------>NS_NORULECHAIN") break;
         }
         case NS_ERROR:			
         {
-                std::cout << "2" << std::endl;
             MFST_TRACE4("------>NS_ERROR") break;
         }
         case SURPRISE:		
         {
-            std::cout << "3" << std::endl;
             MFST_TRACE4("------>NS_SURPRISE") break;
         }
 
@@ -229,8 +224,10 @@ namespace MFST
 		{
 			errid = grebach.getRule(diagnosis[n].nrule).iderror;
 			Error::ERROR err = Error::geterror(errid);
-			snprintf(buf, MFST_DIAGN_MAXSIZE, "%d: строка %d,%s", err.id, lex.tokens[lpos].lineNum+1, err.message);
+			snprintf(buf, MFST_DIAGN_MAXSIZE, "%d: line %d,%s", err.id, lex.tokens[lpos].lineNum+1, err.message);
+      std::cout << err.id << std::endl;
 			rc = buf;
+      throw ERROR_THROW(err.id-1);
 		}
 		return rc;
 	};
@@ -262,8 +259,4 @@ namespace MFST
 		}
 		return true;
 	};
-
-  // void Mfst::buildTree() {
-  //   for(auto rule : )
-  // }
 }

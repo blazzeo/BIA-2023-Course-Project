@@ -8,73 +8,94 @@
 
 namespace GRB {
 Greibach greibach(
-    NS('S'), TS('$'), // стартовый символ, дно стека
-    {Rule(NS('S'),
-          GRB_ERROR_SERIES +
-              0, // Неверная структура программы
-                 // S →	m:t{NrE;};	|	fi:t(F){NrE;};S	|
-                 // m:t{NrE;};S	|	fi:t(F){NrE;}; | i{NrE;}
-          {Rule::Chain({TS('f'), TS('i'), TS(':'), TS('t'), TS('('), NS('F'), TS(')'), TS('{'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S')}),
-           Rule::Chain({TS('m'), TS(':'), TS('t'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')}),
-           Rule::Chain({TS('i'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')}),
-           Rule::Chain({TS('f'), TS('i'), TS(':'), TS('t'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S')}),
-           Rule::Chain({TS('m'), TS(':'), TS('t'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S')}),
-           Rule::Chain({TS('f'), TS('i'), TS(':'), TS('t'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')})}),
-     Rule(NS('N'),
-          GRB_ERROR_SERIES + 1, // Операторы программы
-                 // N	→	di:t; | rE; | i = E; | fi:t(F); | di:t;N | rE;N
-                 // | i=E;N | fi:t(F);N | pE; | pE;N | ?(E){N}; | @(Z){N};
-          {
-              Rule::Chain({TS('d'), TS('i'), TS(':'), TS('t'), TS('='), TS('E'), TS(';')}),
-              Rule::Chain({TS('d'), TS('i'), TS(':'), TS('t'), TS(';')}),
-              Rule::Chain({TS('i'), TS('='), NS('E'), TS(';')}),
-              Rule::Chain({TS('r'), NS('E'), TS(';')}),
-              Rule::Chain({TS('f'), TS('i'), TS(':'), TS('t'), TS('('), NS('F'), TS(')'), TS(';')}),
-              Rule::Chain({TS('d'), TS('i'), TS(':'), TS('t'), TS(';'), NS('N')}),
-              Rule::Chain({TS('d'), TS('i'), TS(':'), TS('t'), TS('='), TS('E'), TS(';'), NS('N')}),
-              Rule::Chain({TS('r'), NS('E'), TS(';'), NS('N')}),
-              Rule::Chain({TS('i'), TS('='), NS('E'), TS(';'), NS('N')}),
-              Rule::Chain({TS('f'), TS('i'), TS(':'), TS('t'), TS('('), NS('F'), TS(')'), TS(';'), NS('N')}),
-              Rule::Chain({TS('p'), NS('E'), TS(';')}),
-              Rule::Chain({TS('p'), NS('E'), TS(';'), NS('N')}),
-              Rule::Chain({TS('?'), TS('('), NS('E'), TS(')'), TS('{'), NS('N'), TS('}'), TS(';')}), // IF
-              Rule::Chain({TS('@'), TS('('), NS('Z'), TS(';'), NS('Z'), TS(';'), NS('Z'), TS(')'), TS('{'), NS('N'), TS('}'), TS(';')}), // FOR
-              Rule::Chain({TS('?'), TS('('), NS('E'), TS(')'), TS('{'), NS('N'), TS('}'), TS(';'), NS('N')}), // IF
-              Rule::Chain({TS('@'), TS('('), NS('Z'), TS(';'), NS('Z'), TS(';'), NS('Z'), TS(')'), TS('{'), NS('N'), TS('}'), TS(';'), NS('N')}) // IF
-          }),
-     Rule(NS('E'),
-          GRB_ERROR_SERIES + 2, // Выражение
-                                // E →	i	|	l	|	(E)
-                                // |	i(W)	|	iM	|	lM
-                                // |	(E)M	|	i(W)M|	i()
-          {Rule::Chain({TS('i')}), Rule::Chain({TS('l')}),
-           Rule::Chain({TS('('), NS('E'), TS(')')}),
-           Rule::Chain({TS('i'), TS('('), NS('W'), TS(')')}),
-           Rule::Chain({TS('i'), TS('('), TS(')')}),
-           Rule::Chain({TS('i'), NS('M')}), Rule::Chain({TS('l'), NS('M')}),
-           Rule::Chain({TS('('), NS('E'), TS(')'), NS('M')}),
-           Rule::Chain({TS('i'), TS('('), NS('W'), TS(')'), NS('M')})}),
-     Rule(NS('W'), GRB_ERROR_SERIES + 3, // Подвыражение
-                                         // W	→	i	|	l
-                                         // |	i,W	|	l,W
-          {Rule::Chain({TS('i')}), Rule::Chain({TS('l')}),
-           Rule::Chain({TS('i'), TS(','), NS('W')}),
-           Rule::Chain({TS('l'), TS(','), NS('W')})}),
-     Rule(NS('F'), GRB_ERROR_SERIES + 4, // Параметры функции
-                                         // F	→	ti	|	ti,F
-          {Rule::Chain({TS('i'), TS(':'), TS('t')}),
-           Rule::Chain({TS('i'), TS(':'), TS('t'), TS(','), NS('F')})}),
-     Rule(NS('M'), GRB_ERROR_SERIES + 7, // M Error
-                  // M →		vE	|	vEM   |   ==E | !=E
-          {
-              Rule::Chain({TS('v'), NS('E')}),
-              Rule::Chain({TS('v'), NS('E'), NS('M')}),
-              Rule::Chain({TS('='), TS('='), NS('E')}),
-              Rule::Chain({TS('!'), TS('='), NS('E')}),
-          }),
-     Rule(NS('Z'), GRB_ERROR_SERIES + 8, // Ошибка в условии цикла
-          // Z ->      di:t=E | di:t=E,Z | i=E
-          {Rule::Chain({TS('d'), TS('i'), TS(':'), TS('t'), TS('='), NS('E')}),
-           Rule::Chain({TS('d'), TS('i'), TS(':'), TS('t'), TS('='), NS('E'), TS(','), NS('Z')}),
-           Rule::Chain({TS('i'), TS('='), NS('E')})})});
+  NS('S'), TS('$'), // стартовый символ, дно стека
+  {Rule(NS('S'),
+        GRB_ERROR_SERIES + 0, // Неверная структура программы
+        // S →	m:t{NrE;};	|	fi:t(F){NrE;};S	|
+        // m:t{NrE;};S	|	fi:t(F){NrE;}; | i{NrE;}
+        {
+        Rule::Chain(grb("fi:t(F){NrE;};S")),
+        Rule::Chain(grb("fi:t(F){NrE;};")),
+        Rule::Chain(grb("fi:t(F){rE};S")),
+        Rule::Chain(grb("fi:t(F){rE};")),
+        Rule::Chain(grb("m:t{NrE};S")),
+        Rule::Chain(grb("m:t{NrE};")),
+        Rule::Chain(grb("di:t=E;S")),
+        Rule::Chain(grb("di:t=E;"))
+        }
+        ),
+    Rule(NS('N'),
+         GRB_ERROR_SERIES + 1, // Операторы программы
+         // N	→	di:t; | rE; | i = E; | fi:t(F); | di:t;N | rE;N
+         // | i=E;N | fi:t(F);N | pE; | pE;N | ?(E){N}; | @(Z){N};
+         {
+         Rule::Chain(grb("di[l]:t=E;")),
+         Rule::Chain(grb("di:t=E;")),
+         Rule::Chain(grb("di[l]:t;")),
+         Rule::Chain(grb("di:t;")),
+         Rule::Chain(grb("i=E;")),
+         Rule::Chain(grb("rE;")),
+         Rule::Chain(grb("fi:t(F);")),
+         Rule::Chain(grb("di[l]:t;N")),
+         Rule::Chain(grb("di:t;N")),
+         Rule::Chain(grb("di:t=E;N")),
+         Rule::Chain(grb("di[l]:t=E;N")),
+         Rule::Chain(grb("rE;N")),
+         Rule::Chain(grb("i=E;N")),
+         Rule::Chain(grb("fi:t(F);N")),
+         Rule::Chain(grb("pE;")),
+         Rule::Chain(grb("pE;N")),
+         Rule::Chain(grb("?(E){N};")),
+         // Rule::Chain({TS('@'), TS('('), NS('Z'), TS(';'), NS('Z'), TS(';'), NS('Z'), TS(')'), TS('{'), NS('N'), TS('}'), TS(';')}), // FOR
+         Rule::Chain(grb("?(E){N};N")),
+         // Rule::Chain({TS('@'), TS('('), NS('Z'), TS(';'), NS('Z'), TS(';'), NS('Z'), TS(')'), TS('{'), NS('N'), TS('}'), TS(';'), NS('N')}) // FOR
+         }),
+    Rule(NS('E'),
+         GRB_ERROR_SERIES + 2, // Выражение
+         // E →	i	|	l	|	(E)
+         // |	i(W)	|	iM	|	lM
+         // |	(E)M	|	i(W)M|	i()
+         // |  'l'
+         {
+         Rule::Chain(grb("i")), 
+         Rule::Chain(grb("l")),
+         Rule::Chain(grb("(E)")),
+         Rule::Chain(grb("i(W)")),
+         Rule::Chain(grb("i()")),
+         Rule::Chain(grb("iM")),
+         Rule::Chain(grb("lM")),
+         Rule::Chain(grb("(E)M")),
+         Rule::Chain(grb("i(W)M"))
+         }),
+    Rule(NS('W'), GRB_ERROR_SERIES + 3, // Подвыражение
+         // W	→	i	|	l
+         // |	i,W	|	l,W
+         {
+         Rule::Chain(grb("i")),
+         Rule::Chain(grb("l")),
+         Rule::Chain(grb("i,W")),
+         Rule::Chain(grb("l,W"))
+         }),
+    Rule(NS('F'), GRB_ERROR_SERIES + 4, // Параметры функции
+         // F	→	i:t|	i:t,F
+         {
+         Rule::Chain(grb("i:t")),
+         Rule::Chain(grb("i:t,F"))
+         }),
+    Rule(NS('M'), GRB_ERROR_SERIES + 6, // M Error
+         // M →	vE|	vEM | ==E | !=E
+         {
+         Rule::Chain(grb("vE")),
+         Rule::Chain(grb("vEM")),
+         Rule::Chain(grb("==E")),
+         Rule::Chain(grb("!=E")),
+         }),
+    Rule(NS('Z'), GRB_ERROR_SERIES + 7, // Ошибка в условии цикла
+         // Z -> di:t=E | di:t=E,Z | i=E
+         {
+         Rule::Chain(grb("di:t=E")),
+         Rule::Chain(grb("di:t=E,Z")),
+         Rule::Chain(grb("i=E"))
+         })
+  });
 }

@@ -5,6 +5,7 @@
 typedef short GRBALPHABET;
 namespace GRB
 {
+  std::vector<GRBALPHABET> grb(const std::string& str);
 	struct Rule							//правило в грамматике Грейбах
 	{
 		GRBALPHABET nn;							//нетерминалы (левый символ правила) < 0

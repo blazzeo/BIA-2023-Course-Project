@@ -383,6 +383,12 @@ Fst::RELATION('9',1)),\
 #define MOD Fst::CHAIN(2, Lexer::mod, \
                 Fst::NODE(1, Fst::RELATION('%',1)), \
                 Fst::NODE())
+#define OPEN_SQUARE Fst::CHAIN(2, Lexer::open_priority, \
+                Fst::NODE(1, Fst::RELATION('[',1)), \
+                Fst::NODE())
+#define CLOSE_SQUARE Fst::CHAIN(2, Lexer::close_priority, \
+                Fst::NODE(1, Fst::RELATION(']',1)), \
+                Fst::NODE())
 #define EQUAL Fst::CHAIN(3, Lexer::equal, \
                 Fst::NODE(1, Fst::RELATION('=',1)), \
                 Fst::NODE(1, Fst::RELATION('=',2)), \

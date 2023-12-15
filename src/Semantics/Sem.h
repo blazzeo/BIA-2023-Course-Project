@@ -13,6 +13,7 @@ struct Scope {
         bool isFunc = false;
         std::string name = "undef";
     } specs;
+    size_t offset_length = 0;
     std::vector<Lexer::Identifier> Identifiers;
     std::vector<Lexer::Identifier> parms;
     Scope* prevScope = nullptr;

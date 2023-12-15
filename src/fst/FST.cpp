@@ -1,8 +1,9 @@
-#include "utility"
+#include <utility>
 #include "FST.h"
 #include "iostream"
 #include <algorithm>
 #include <cstring>
+#include "memory"
 
 using namespace std;
 

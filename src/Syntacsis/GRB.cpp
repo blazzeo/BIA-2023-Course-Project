@@ -2,8 +2,6 @@
 #include "Rules.h"
 #include "stdio.h"
 #include "string.h"
-#include "iostream"
-#include <cstdarg>
 #include <vector>
 
 namespace GRB
@@ -32,6 +30,16 @@ namespace GRB
 		for (int i = 0; i < this->size; i++)
 			rules[i] = vec[i];
 	}
+
+std::vector<GRBALPHABET> grb(const std::string& str) {
+  std::vector<GRBALPHABET> grb;
+  for(auto lexem : str) {
+    if (lexem > 'A' && lexem < 'Z') {
+      grb.push_back(NS(lexem));
+    } else grb.push_back(TS(lexem));
+  }
+  return grb;
+}
 
 	short Greibach::getRule(GRBALPHABET pnn, Rule& prule)
 	{

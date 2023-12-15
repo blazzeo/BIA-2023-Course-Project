@@ -1,6 +1,8 @@
 #include "PolishNotation.h"
+#include "../Error/Error.h"
 #include <iostream>
 #include <map>
+#include <memory>
 #include <queue>
 #include <stack>
 #include <string>
@@ -18,9 +20,9 @@ void printTable(Lexer::Table &table, size_t start, size_t end) {
 }
 
 map<Lexer::TokenType, int> priority = {
-  {Lexer::semi, -3},           {Lexer::comma, -2}, {Lexer::open_prioirity, 1},
-  {Lexer::close_priority, -1}, {Lexer::sum, 2},    {Lexer::sub, 2},
-  {Lexer::multiply, 3},        {Lexer::div, 3},
+  {Lexer::semi, -3},           {Lexer::comma, -2}, {Lexer::open_parm_brackets, 1},
+  {Lexer::close_parm_brackets, -1}, {Lexer::sum, 2},    {Lexer::sub, 2},
+  {Lexer::multiply, 3},        {Lexer::div, 3},    {Lexer::mod, 3},
 };
 
 map<Lexer::TokenType, char> operators = {
@@ -28,21 +30,43 @@ map<Lexer::TokenType, char> operators = {
   {Lexer::sub, '-'},
   {Lexer::multiply, '*'},
   {Lexer::div, '/'},
+  {Lexer::mod, '%'}
 };
 
+bool checkParm(shared_ptr<Lexer::Identifier> &fn, Lexer::Token &token, short id) {
+  // switch (token.type) {
+  //   case Lexer::identifier: 
+  //     break;
+  //   case Lexer::liter:
+  //     break;
+  // }
+  if (fn->parms[id].type != token.identifier->type) {
+    return false;
+  }
+  return true;
+}
+
 Lexer::ValueType checkNotation(Lexer::Table &table, int id) {
-  bool fnFlag = false;
   string result{};
   queue<Lexer::Token> queue;
   stack<Lexer::Token> stack;
+
+  shared_ptr<Lexer::Identifier> fn;
+  bool fnFlag = false;
+  short parm_id = 0;
+  short parm_size = 0;
+
   Lexer::ValueType returnType = Lexer::undef;
   int start = id, end = id;
   Lexer::Token token = table.tokens[id];
   do {
     switch (table.tokens[id].type) {
       case Lexer::identifier: {
-        if (table.tokens[id].identifier->isFunc) {
+        if (table.tokens[id].identifier->isFunc) {  // IF FUNC
+          fn = table.tokens[id].identifier;
+          parm_size = fn->parms.size();
           if(returnType == Lexer::undef) {
+            cout << "1 RT: " << table.tokens[id].identifier->type << endl;
             returnType = table.tokens[id].identifier->type;
           } else {
             if (returnType != table.tokens[id].identifier->type)
@@ -50,15 +74,21 @@ Lexer::ValueType checkNotation(Lexer::Table &table, int id) {
           }
           fnFlag = true;
           stack.push(table.tokens[id]);
-        } else {
+        } else {                                    // IF NOT FUNC
           if (fnFlag) {
-            stack.push(table.tokens[id]);
+            if(checkParm(fn, table.tokens[id], parm_id))
+              stack.push(table.tokens[id]);
+            else throw ERROR_THROW(406);
+            ++parm_id;
           } else {
             if(returnType == Lexer::undef) {
+              cout << "2 RT: " << table.tokens[id].identifier->type << endl;
               returnType = table.tokens[id].identifier->type;
             } else {
-              if (returnType != table.tokens[id].identifier->type)
+              if (returnType != table.tokens[id].identifier->type) {
+            cout << "3 RT: " << table.tokens[id].identifier->type << endl;
                 return Lexer::undef;
+              }
             }
             result += table.tokens[id].identifier->name;
             queue.push(table.tokens[id]);
@@ -76,6 +106,7 @@ Lexer::ValueType checkNotation(Lexer::Table &table, int id) {
       case Lexer::multiply:
       case Lexer::sum:
       case Lexer::sub:
+      case Lexer::mod:
       case Lexer::div: {
         if (stack.empty()) {
           stack.push(table.tokens[id]);
@@ -123,6 +154,7 @@ Lexer::ValueType checkNotation(Lexer::Table &table, int id) {
           queue.push(stack.top());
           result += ' ';
           fnFlag = false;
+          fn = nullptr;
           stack.pop();
         }
         break;
@@ -148,13 +180,14 @@ Lexer::ValueType checkNotation(Lexer::Table &table, int id) {
 
   printTable(table, start - 2, end + 2);
   size_t quSize = queue.size();
-  for (size_t i = start; i < end - quSize; i++) {
-    if (!queue.empty()) {
-      table.tokens[i] = queue.front();
+  // for (size_t i = start; i < end - quSize; i++) {
+  size_t i = start;
+    while (!queue.empty()) {
+      table.tokens[i++] = queue.front();
       queue.pop();
     }   
-  }
-  for (size_t i = end - quSize, j = end - quSize; i < end; i++)
+  if (i < end)
+    for (size_t ii = end - quSize, j = end - quSize; ii < end; ii++)
       table.tokens.erase(table.tokens.begin()+j);
   printTable(table, start - 2, end + 2);
   return returnType;

@@ -4,27 +4,28 @@
 #include "Sem.h"
 #include <iostream>
 #include <cstddef>
+#include <ostream>
 #include <string>
 
 namespace Sem {
 
 Lexer::Identifier* checkIdent(Scope *scope, std::shared_ptr<Lexer::Identifier> &ident) {
   Lexer::Identifier* result = nullptr;
-  for (auto inIdent : scope->Identifiers) {
+  for (auto inIdent : scope->Identifiers) { //  check in Identifiers
     if (inIdent.name == ident->name) {
       result = &inIdent;
       break;
     }
   }
   if (!result) {
-    for (auto parm : scope->parms) {
+    for (auto parm : scope->parms) { //   check in parms
       if (parm.name == ident->name) {
         result = &parm;
         break;
       }
     }
   }
-  if (!result && scope->prevScope) {
+  if (!result && scope->prevScope) { //   if prevScope exists and ident not found
     return checkIdent(scope->prevScope, ident);
   }
   return result;
@@ -32,6 +33,7 @@ Lexer::Identifier* checkIdent(Scope *scope, std::shared_ptr<Lexer::Identifier> &
 
 Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
   Scope scope;
+  size_t stackSize = 0;
   id++;
   if (!prevScope) scope.specs.name = "GLOBAL";
   scope.prevScope = prevScope;
@@ -43,10 +45,12 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
     while(i > 0) {
       Lexer::Token token = table->tokens[i];
       if (token.type == Lexer::close_parm_brackets) {
-        parmlist = true;
+        parmlist = true;  //  ParmFlag if parms available
         while(token.type != Lexer::open_parm_brackets) {
           if (token.type == Lexer::identifier) {
-            scope.parms.push_back(*token.identifier);
+            token.identifier->offset = stackSize;
+            scope.parms.push_back(*token.identifier); //  Add Parms to Scope
+            stackSize += token.identifier->size;  //  Resize Stack Size
           }
           token = table->tokens[--i];
         }
@@ -54,19 +58,22 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
       // if (token.type == Lexer::func) {
       //     scope.specs.isFunc = true;
       // }
-      if (token.type == Lexer::condition) {
+      if (token.type == Lexer::condition) { // IF Token
         scope.specs.name = "if";
         scope.specs.returnType = Lexer::undef;
         break;
       }
-      if (token.type == Lexer::identifier) {
+      if (token.type == Lexer::identifier) { // Identifier Token
         if (!parmlist) break;
+
+        token.identifier->parms = scope.parms;
+
         scope.specs.name = token.identifier->name;
         scope.specs.returnType = token.identifier->type;
         scope.specs.isFunc = token.identifier->isFunc;
         break;
       }
-      if (token.type == Lexer::main) {
+      if (token.type == Lexer::main) {  //  Main Token
         scope.specs.name = token.identifier->name;
         scope.specs.returnType = token.identifier->type;
         break;
@@ -75,8 +82,8 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
     }
   }
 
-  Lexer::ValueType Expr = Lexer::undef;
-  bool returnFound = false;
+  Lexer::ValueType Expr = Lexer::undef; //  Expression Type
+  bool returnFound = false;             //  returnFlag
 
   while (id < table->tokens.size()) {
     Lexer::Token token = table->tokens[id];
@@ -87,17 +94,27 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
           scope.specs.isFunc = true;
         if (token.identifier->type != Lexer::undef) {
           bool found = false;
-          for (auto parm : scope.parms)
-          if (parm.name == token.identifier->name) 
-            found = true;
-          for (auto ident : scope.Identifiers)
-          if (ident.name == token.identifier->name) // if ident was declared before
-            throw ERROR_THROW(403);
-          if (!found) scope.Identifiers.push_back(*token.identifier);
-        } else {
-          if(auto result = checkIdent(&scope, table->tokens[id].identifier)) {
-            *table->tokens[id].identifier = *result;
-          } 
+          for (auto parm : scope.parms) { //  find identifier in scope parms
+            if (parm.name == token.identifier->name) {
+              found = true;
+              break;
+            }
+          }
+          for (auto ident : scope.Identifiers) { //   find identifier in scope Identifiers
+            if (ident.name == token.identifier->name) { 
+              found = true;
+              break;
+            }
+          }
+          if (found) throw ERROR_THROW(403); //   if ident was declared before
+          scope.Identifiers.push_back(*token.identifier); //  if ident wasn't found before push
+        } else {  //  if identifier hasn't got type -> find first declaration
+          auto result = checkIdent(&scope, table->tokens[id].identifier);
+          if (result == nullptr) { //   if identifier's declaration wasn't found
+            throw ERROR_THROW(402);
+          }
+          *table->tokens[id].identifier = *result;
+          scope.offset_length += result->size;
         }
         break;
       }
@@ -112,16 +129,16 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
           scope.Identifiers.erase(scope.Identifiers.end()-1);
         break;
       }
-      case Lexer::equals: {
+      case Lexer::equals: { //  PolishNotation Check
         Expr = checkNotation(*table, id+1);
         if (table->tokens[id-1].identifier->type != Expr)
           throw ERROR_THROW(407);
         break;
       }
-      case Lexer::ret: {
+      case Lexer::ret: { //   PolishNotation Check
         Expr = checkNotation(*table, id+1);
-        if (scope.specs.isFunc && 
-          scope.specs.returnType != Expr) {
+        if (scope.specs.isFunc && scope.specs.returnType != Expr) {
+          std::cout << scope.specs.returnType << " : " << Expr << std::endl;
           throw ERROR_THROW(401)
         }
         returnFound = true;
@@ -144,29 +161,32 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
   return scope;
 }
 
+using namespace std;
+
 void PrintTable(Scope scope, short level) {
-  std::string type [4] = {
+  string type [4] = {
     "int",
     "str",
     "bool",
     "void"
   };
-  std::string tabs(level, '\t');
-  tabs[level-1]='|';
-  std::cout << std::endl << tabs << "==== " << scope.specs.name << " : " << type[scope.specs.returnType] << std::endl;
-  std::cout << " ====" << '\n';
-  std::cout << tabs << "Parms : \n";
-  for (size_t i = 0; i < scope.parms.size(); i++) {
-    std::cout << tabs << i << '\t' << scope.parms[i].name << '\t' << type[scope.parms[i].type] << std::endl;
+  string tabs(level, '\t');
+  tabs[level-1] = '|';
+  cout << endl << tabs << "==== " << scope.specs.name << " : " << type[scope.specs.returnType] << endl; //  Scope Name
+  cout << " ====" << '\n';
+  cout << tabs << "Parms : \n";
+  for (size_t i = 0; i < scope.parms.size(); i++) { //  Scope Parms
+    cout << tabs << i << '\t' << scope.parms[i].name << '\t' << type[scope.parms[i].type] << endl;
   }
-  std::cout << tabs << "Identifiers : \n";
-  for (size_t i = 0; i < scope.Identifiers.size(); i++) {
-    std::cout << tabs << i << '\t' << scope.Identifiers[i].name << '\t' << type[scope.Identifiers[i].type] << std::endl;
+  cout << tabs << "Identifiers : \n";
+  for (size_t i = 0; i < scope.Identifiers.size(); i++) { //  Scope Identifiers
+    cout << tabs << i << '\t' << scope.Identifiers[i].name << '\t' << type[scope.Identifiers[i].type] << endl;
   }
+
   if (!scope.nextScopes.empty()) {
-    std::cout << tabs << "Next scopes: \n";
+    cout << tabs << "Next scopes: \n";
     for (size_t i = 0; i < scope.nextScopes.size(); i++) {
-      std::cout << tabs << i << '\t' << scope.nextScopes[i].specs.name << '\t' << type[scope.nextScopes[i].specs.returnType] << std::endl;
+      cout << tabs << i << '\t' << scope.nextScopes[i].specs.name << '\t' << type[scope.nextScopes[i].specs.returnType] << endl;
     }
     for(auto nscope : scope.nextScopes) {
       PrintTable(nscope, level+1);

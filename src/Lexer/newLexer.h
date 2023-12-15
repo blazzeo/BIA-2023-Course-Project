@@ -15,7 +15,7 @@ enum TokenType {
     close_app_brackets,
     open_parm_brackets,
     close_parm_brackets,
-    open_prioirity,
+    open_priority,
     close_priority,
     sum,
     multiply,
@@ -54,31 +54,33 @@ enum ValueType {
 struct Identifier {
   std::string name;
   ValueType type;
+  size_t size = 0;
+  size_t offset = 0;
   bool isFunc = 0;
   std::variant<int, std::string, bool> value;
-  short parms_count = 0;
+  std::vector<Identifier> parms{};
 
-    Identifier(std::string nm, ValueType tp, bool isfunc = 0)
-        : name(nm), type(tp), isFunc(isfunc)
-    {
-        switch(tp) {
-            case i:
-                value = (int)0;
-                break;
-            case str:
-                value = "";
-                break;
-            case bol:
-                value = false;
-                break;
-            case undef:
-                value = "undef";
-                break;
-        }
+  Identifier(std::string nm, ValueType tp, bool isfunc = 0)
+  : name(nm), type(tp), isFunc(isfunc)
+  {
+    switch(tp) {
+      case i:
+        value = 0;
+        break;
+      case str:
+        value = "";
+        break;
+      case bol:
+        value = false;
+        break;
+      case undef:
+        value = "undef";
+        break;
     }
+  }
 };
 
-const std::string tokenTypes = " ;{}()[]vvvv,=ittmlrfdput:?@vvv";
+const std::string tokenTypes = " ;{}()[]vvvv,=ittmlrfdput:?@vvvvv";
 
 struct Token {
   TokenType type;
@@ -87,13 +89,14 @@ struct Token {
   std::shared_ptr<Identifier> identifier = nullptr;
   std::string value;
 
-  Token() : type(undefined), lineNum(-1) {}
+  Token()
+    : type(undefined), lineNum(-1) {}
   Token(TokenType tp, short ln, std::string val = "")
-      : type(tp), lineNum(ln), value(val) {
+    : type(tp), lineNum(ln), value(val) {
     lexema = tokenTypes[tp];
   }
   Token(TokenType tp, short ln, std::shared_ptr<Identifier> ident)
-      : type(tp), lineNum(ln), identifier(ident) {
+    : type(tp), lineNum(ln), identifier(ident) {
     lexema = tokenTypes[tp];
   }
   Token& operator=(Token oldToken) {

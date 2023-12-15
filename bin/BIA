@@ -8,16 +8,14 @@ main : i32 {
 	let x: i32;
 	x = 2 * (square(20) + 4);
 	print x;
-	let str1: string;
+	let str1[10]: char;
   str1 = '54321';
   let z: bool;
   z = 1;
-	if(z)
-	{
+	if(z) {
 		let len : i32;
 		len = strlen(str1);
-		if (len == 10)
-		{
+		if (len == 10) {
 			print len;
 		};
 		print 'length is less than 10';

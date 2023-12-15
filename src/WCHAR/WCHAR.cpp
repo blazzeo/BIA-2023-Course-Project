@@ -1,4 +1,3 @@
-#include <iostream>
 #include "../Error/Error.h"
 
 wchar_t* getWC(const char* src) {

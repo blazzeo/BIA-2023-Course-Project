@@ -1,12 +1,11 @@
 #include "In.h"
-#include "../WCHAR/WCHAR.h"
 #include <fstream>
 #include "../Error/Error.h"
 #include <iostream>
 
 namespace In {
-IN getin(wchar_t infile[]) {
-    char* filename = getCH(infile);
+IN getin(char infile[]) {
+    char* filename = infile;
     std::ifstream file(filename);
     if (!file.is_open()) {
         throw ERROR_THROW(110);
@@ -21,7 +20,7 @@ IN getin(wchar_t infile[]) {
 
     in.size = size;
 
-    setlocale(LC_ALL, "ru_RU.CP1251");
+    // setlocale(LC_ALL, "ru_RU.CP1251");
     unsigned char* pText = in.text;
 
     for (size_t col=0, line=0, i=0; i < size; ++col, ++i) {
@@ -55,7 +54,7 @@ IN getin(wchar_t infile[]) {
     *pText = '\0';
     file.close();
     delete []filename;
-    setlocale(LC_ALL, "en_US.UTF-8");
+    // setlocale(LC_ALL, "en_US.UTF-8");
     return in;
 }
 };

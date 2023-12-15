@@ -53,8 +53,11 @@
               ;         ;         9
             let         d        10
      Identifier         i        10
+  Open Priority         [        10
+        Literal         l        10        10
+ Close Priority         ]        10
           Colon         :        10
-         string         t        10
+     Identifier         i        10
               ;         ;        10
      Identifier         i        11
               =         =        11
@@ -73,51 +76,50 @@
       Open Parm         (        14
      Identifier         i        14
      Close Parm         )        14
-   Open Bracket         {        15
-            let         d        16
+   Open Bracket         {        14
+            let         d        15
+     Identifier         i        15
+          Colon         :        15
+            i32         t        15
+              ;         ;        15
      Identifier         i        16
-          Colon         :        16
-            i32         t        16
+              =         =        16
+     Identifier         i        16
+      Open Parm         (        16
+     Identifier         i        16
+     Close Parm         )        16
               ;         ;        16
-     Identifier         i        17
-              =         =        17
-     Identifier         i        17
+             if         ?        17
       Open Parm         (        17
      Identifier         i        17
+             ==         v        17
+        Literal         l        17        10
      Close Parm         )        17
-              ;         ;        17
-             if         ?        18
-      Open Parm         (        18
+   Open Bracket         {        17
+          print         p        18
      Identifier         i        18
-              =         =        18
-              =         =        18
-        Literal         l        18        10
-     Close Parm         )        18
-   Open Bracket         {        19
+              ;         ;        18
+  Close Bracket         }        19
+              ;         ;        19
           print         p        20
-     Identifier         i        20
+        Literal         l        20length is less than 10
               ;         ;        20
   Close Bracket         }        21
               ;         ;        21
-          print         p        22
-        Literal         l        22length is less than 10
+            let         d        22
+     Identifier         i        22
+          Colon         :        22
+            i32         t        22
               ;         ;        22
-  Close Bracket         }        23
+     Identifier         i        23
+              =         =        23
+     Identifier         i        23
+      Open Parm         (        23
+     Identifier         i        23
+     Close Parm         )        23
               ;         ;        23
-            let         d        24
-     Identifier         i        24
-          Colon         :        24
-            i32         t        24
+         return         r        24
+        Literal         l        24         0
               ;         ;        24
-     Identifier         i        25
-              =         =        25
-     Identifier         i        25
-      Open Parm         (        25
-     Identifier         i        25
-     Close Parm         )        25
+  Close Bracket         }        25
               ;         ;        25
-         return         r        26
-        Literal         l        26         0
-              ;         ;        26
-  Close Bracket         }        27
-              ;         ;        27
