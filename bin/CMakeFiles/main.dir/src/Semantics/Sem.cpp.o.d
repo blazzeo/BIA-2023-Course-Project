@@ -720,8 +720,10 @@ CMakeFiles/main.dir/src/Semantics/Sem.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__functional/unary_negate.h \
   /Users/ivanbraganets/kursovoy/src/Semantics/../Lexer/../In/In.h \
   /Users/ivanbraganets/kursovoy/src/Semantics/../Error/Error.h \
+  /Users/ivanbraganets/kursovoy/src/Semantics/../Error/../Lexer/newLexer.h \
   /Users/ivanbraganets/kursovoy/src/Semantics/../PolishNotation/PolishNotation.h \
   /Users/ivanbraganets/kursovoy/src/Semantics/../PolishNotation/../Lexer/newLexer.h \
+  /Users/ivanbraganets/kursovoy/src/Semantics/../PolishNotation/../Semantics/Sem.h \
   /Users/ivanbraganets/kursovoy/src/Semantics/Sem.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/ios \

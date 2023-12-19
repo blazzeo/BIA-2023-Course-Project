@@ -11,17 +11,17 @@ Greibach greibach(
   NS('S'), TS('$'), // стартовый символ, дно стека
   {Rule(NS('S'),
         GRB_ERROR_SERIES + 0, // Неверная структура программы
-        // S →	m:t{NrE;};	|	fi:t(F){NrE;};S	|
+        // S →	m:t{NrE;};|	fi:t(F){NrE;};S	|
         // m:t{NrE;};S	|	fi:t(F){NrE;}; | i{NrE;}
         {
         Rule::Chain(grb("fi:t(F){NrE;};S")),
-        Rule::Chain(grb("fi:t(F){NrE;};")),
-        Rule::Chain(grb("fi:t(F){rE};S")),
-        Rule::Chain(grb("fi:t(F){rE};")),
-        Rule::Chain(grb("m:t{NrE};S")),
-        Rule::Chain(grb("m:t{NrE};")),
+        Rule::Chain(grb("fi:t(F){rE;};S")),
         Rule::Chain(grb("di:t=E;S")),
-        Rule::Chain(grb("di:t=E;"))
+        Rule::Chain(grb("di:t;S")),
+        Rule::Chain(grb("di[l]:t=E;S")),
+        Rule::Chain(grb("di[l]:t;S")),
+        Rule::Chain(grb("m:t{NrE;};")),
+        Rule::Chain(grb("m:t{rE;};")),
         }
         ),
     Rule(NS('N'),
@@ -34,15 +34,14 @@ Greibach greibach(
          Rule::Chain(grb("di[l]:t;")),
          Rule::Chain(grb("di:t;")),
          Rule::Chain(grb("i=E;")),
-         Rule::Chain(grb("rE;")),
+         Rule::Chain(grb("i=E;N")),
          Rule::Chain(grb("fi:t(F);")),
+         Rule::Chain(grb("fi:t(F);N")),
          Rule::Chain(grb("di[l]:t;N")),
          Rule::Chain(grb("di:t;N")),
          Rule::Chain(grb("di:t=E;N")),
          Rule::Chain(grb("di[l]:t=E;N")),
-         Rule::Chain(grb("rE;N")),
-         Rule::Chain(grb("i=E;N")),
-         Rule::Chain(grb("fi:t(F);N")),
+         Rule::Chain(grb("rE;")),
          Rule::Chain(grb("pE;")),
          Rule::Chain(grb("pE;N")),
          Rule::Chain(grb("?(E){N};")),
@@ -69,7 +68,7 @@ Greibach greibach(
          }),
     Rule(NS('W'), GRB_ERROR_SERIES + 3, // Подвыражение
          // W	→	i	|	l
-         // |	i,W	|	l,W
+         //     |	i,W	|	l,W
          {
          Rule::Chain(grb("i")),
          Rule::Chain(grb("l")),
@@ -77,25 +76,25 @@ Greibach greibach(
          Rule::Chain(grb("l,W"))
          }),
     Rule(NS('F'), GRB_ERROR_SERIES + 4, // Параметры функции
-         // F	→	i:t|	i:t,F
+         // F	→	i:t |	i:t,F
          {
          Rule::Chain(grb("i:t")),
-         Rule::Chain(grb("i:t,F"))
+         Rule::Chain(grb("i:t,F")),
          }),
     Rule(NS('M'), GRB_ERROR_SERIES + 6, // M Error
-         // M →	vE|	vEM | ==E | !=E
+         // M →	vE | vEM | ==E | !=E
          {
          Rule::Chain(grb("vE")),
          Rule::Chain(grb("vEM")),
          Rule::Chain(grb("==E")),
          Rule::Chain(grb("!=E")),
          }),
-    Rule(NS('Z'), GRB_ERROR_SERIES + 7, // Ошибка в условии цикла
-         // Z -> di:t=E | di:t=E,Z | i=E
-         {
-         Rule::Chain(grb("di:t=E")),
-         Rule::Chain(grb("di:t=E,Z")),
-         Rule::Chain(grb("i=E"))
-         })
+    // Rule(NS('Z'), GRB_ERROR_SERIES + 7, // Ошибка в условии цикла
+    //      // Z -> di:t=E | di:t=E,Z | i=E
+    //      {
+    //      Rule::Chain(grb("di:t=E")),
+    //      Rule::Chain(grb("di:t=E,Z")),
+    //      Rule::Chain(grb("i=E"))
+    //      })
   });
 }

@@ -5,8 +5,6 @@
 #include "newLexer.h"
 #include <cstdlib>
 #include <fstream>
-#include <iomanip>
-#include <iostream>
 #include <cstring>
 #include <ostream>
 #include <string>
@@ -17,11 +15,11 @@
 #define SEPARATOR '$'
 
 const std::string SEPARATORS = " /:;=*,+-()[]{}<>\t!";
-std::vector<Fst::CHAIN> vectorOfChains = {STR_LITER, MAIN, INT_LITER, BOOL_LITER, RETURN, FUNCTION, PRINT, DECLARE, LITER, IF, FOR, IDENTIFIER};
+std::vector<Fst::CHAIN> vectorOfChains = {STR_LITER, MAIN, INT_LITER, BOOL_LITER, RETURN, FUNCTION, PRINT, DECLARE, LITER, IF, FOR, TRUE, FALSE, IDENTIFIER};
 std::vector<Fst::CHAIN> vectorOfSeparators = {DIV, SEMI, CLOSE_APP_BRACKET, OPEN_APP_BRACKET, OPEN_PARM_BRACKET, CLOSE_PARM_BRACKET, OPEN_SQUARE, CLOSE_SQUARE, SUM, COLON, SUB, COMMA, MULTIPLY, MOD, LESS, GREATER, EQUALS, EQUAL, NEQUAL};
 
 namespace Lexer {
-void checkLexem(Table& table, std::string word, std::vector<Fst::CHAIN> chains, size_t lineNum)
+void checkLexem(Table& table, std::string word, std::vector<Fst::CHAIN> chains, size_t lineNum, size_t colPos)
 {
   static short identId = 0;
   static bool offsetFlag = false;
@@ -34,17 +32,20 @@ void checkLexem(Table& table, std::string word, std::vector<Fst::CHAIN> chains, 
     if (Fst::execute(fst))
     {
       switch ((int)chain.type) {
-        case 6: {
+        case 6: { //        ARRAY FLAG
           offsetFlag = true;
+          Token token(chain.type, lineNum, colPos);
+          table.tokens.push_back(token);
+          break;
         }
         case 20: {  //      FUNC FLAG
-          Token token(chain.type, lineNum);
           funcType = true;
+          Token token(chain.type, lineNum, colPos);
           table.tokens.push_back(token);
           break;
         }
         case 15: {  //      INT FLAG
-          Token token(chain.type, lineNum);
+          Token token(chain.type, lineNum, colPos);
           table.tokens.push_back(token);
           table.identifiers.back()->type = i;
           table.identifiers.back()->value = 0;
@@ -52,15 +53,16 @@ void checkLexem(Table& table, std::string word, std::vector<Fst::CHAIN> chains, 
           break;
         }
         case 16: {  //      CHAR FLAG
-          Token token(chain.type, lineNum);
+          Token token(chain.type, lineNum, colPos);
           table.tokens.push_back(token);
           table.identifiers.back()->type = str;
           table.identifiers.back()->value = "";
           table.identifiers.back()->size = offset_length + 1;
+          offset_length = 0;
           break;
         }
         case 24: {  //      BOOL FLAG
-          Token token(chain.type, lineNum);
+          Token token(chain.type, lineNum, colPos);
           table.tokens.push_back(token);
           table.identifiers.back()->type = bol;
           table.identifiers.back()->value = false;
@@ -71,7 +73,7 @@ void checkLexem(Table& table, std::string word, std::vector<Fst::CHAIN> chains, 
           std::shared_ptr<Identifier> ident(new Identifier(word, undef, funcType));
           funcType = false;
           table.identifiers.push_back(ident);
-          Token token(chain.type, lineNum, ident);
+          Token token(chain.type, lineNum, colPos, ident);
           table.tokens.push_back(token);
           break;
         }
@@ -80,19 +82,29 @@ void checkLexem(Table& table, std::string word, std::vector<Fst::CHAIN> chains, 
             offset_length = atoi(word.c_str());
             offsetFlag = false;
           }
-          Token token(chain.type, lineNum, word);
+          Token token(chain.type, lineNum, colPos, word);
+          table.tokens.push_back(token);
+          break;
+        }
+        case 33: {
+          Token token(chain.type, lineNum, colPos, word, Lexer::bol);
+          table.tokens.push_back(token);
+          break;
+        }
+        case 34: {
+          Token token(chain.type, lineNum, colPos, word, Lexer::bol);
           table.tokens.push_back(token);
           break;
         }
         case 17: {  //       MAIN
           std::shared_ptr<Identifier> ident(new Identifier(word, i, 1));
-          Token token(chain.type, lineNum, ident);
+          Token token(chain.type, lineNum, colPos, ident);
           table.identifiers.push_back(ident);
           table.tokens.push_back(token);
           break;
         }
         default: {  //      OTHER
-          Token token(chain.type, lineNum);
+          Token token(chain.type, lineNum, colPos);
           table.tokens.push_back(token);
           break;
         }
@@ -100,7 +112,7 @@ void checkLexem(Table& table, std::string word, std::vector<Fst::CHAIN> chains, 
       return;
     }
   }
-  throw ERROR_THROW_LEXER(114, lineNum, word);
+  throw ERROR_THROW_LEXER(114, lineNum, colPos, word);
 }
 
 std::string findSymbolIndex(const unsigned char* str) {
@@ -116,17 +128,18 @@ std::string findSymbolIndex(const unsigned char* str) {
 Table tokenize(In::IN &in) {
   Table table;
   std::string word;
-  for (size_t i = 0, lineNum = 0; i < in.size; i++) {
+  for (size_t i = 0, lineNum = 1, colPos = 1; i < in.size; i++, colPos++) {
     char symbol = (SEPARATORS.find(in.text[i]) != std::string::npos) ? 
       '$' : in.text[i];
     switch (symbol) {
       case NEWLINE :         // NEW LINE
         word.clear();
         lineNum++;
+        colPos=1;
         break;
       case SEPARATOR :          // SEPARATOR, WORD
         if (!word.empty()) {                        // WORD CHECK
-          checkLexem(table, word, vectorOfChains, lineNum);
+          checkLexem(table, word, vectorOfChains, lineNum, colPos);
           word.clear();
         }
         if (in.text[i]!=' ' && in.text[i]!='\t') {  //  SEPARATOR CHECK
@@ -134,12 +147,12 @@ Table tokenize(In::IN &in) {
               (in.text[i]=='!' && in.text[i+1]=='=')) {
             word.push_back(in.text[i]);
             word.push_back(in.text[i+1]);
-            checkLexem(table, word, vectorOfSeparators, lineNum);
+            checkLexem(table, word, vectorOfSeparators, lineNum, colPos);
             ++i;
             word.clear();
           } else {
             word.push_back(in.text[i]);
-            checkLexem(table, word, vectorOfSeparators, lineNum);
+            checkLexem(table, word, vectorOfSeparators, lineNum, colPos);
             word.clear();
           }
         }
@@ -147,7 +160,7 @@ Table tokenize(In::IN &in) {
       case STR : {                                  // STR LITER
         std::string str = findSymbolIndex(in.text + i + 1); // find substring
         word.insert(0, str);
-        Token Token(liter, lineNum, word);
+        Token Token(liter, lineNum, colPos, word, Lexer::str);
         table.tokens.push_back(Token);
         i+=word.length()+1;
         word.clear();
@@ -237,18 +250,18 @@ void generateLog(Table &table) {
           break;
       }
     }
-  } else Error::geterror(202);
+  } else throw ERROR_THROW(202);
   it.close();
   std::ofstream lt("LexemTable.lt");
   if (lt.is_open()) {
     lt << "---------------- LexemTable -----------------" << std::endl;
     lt << std::setw(15) << "Type" << std::setw(10) << "Lexem" << std::setw(10) << "LineNum" << std::setw(10) << "Value" << std::endl;
     for (auto token : table.tokens) {
-      lt << std::setw(15) << tokens[token.type] << std::setw(10) << token.lexema << std::setw(10) << token.lineNum;
-      if(token.type == liter) lt << std::setw(10) << token.value;
+      lt << std::setw(15) << tokens[token.type] << std::setw(10) << token.lexema << std::setw(10) << token.position.line;
+      if(token.type == liter) lt << std::setw(10) << token.value.first;
       lt << std::endl;
     }
-  } else Error::geterror(203);
+  } else throw ERROR_THROW(203);
   lt.close();
 }
 

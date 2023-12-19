@@ -21,8 +21,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.o.d"
   "CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o"
   "CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o.d"
-  "CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.o"
-  "CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.o.d"
   "CMakeFiles/main.dir/src/fst/Fst.cpp.o"
   "CMakeFiles/main.dir/src/fst/Fst.cpp.o.d"
   "CMakeFiles/main.dir/src/main.cpp.o"

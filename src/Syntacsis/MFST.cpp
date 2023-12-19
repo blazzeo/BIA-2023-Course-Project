@@ -111,7 +111,7 @@ namespace MFST
 	{
 		bool rc = false;
 		MfstState state;
-		if (rc = (storestate.size() > 0))
+		if ((rc = (storestate.size()) > 0))
 		{
 			state = storestate.top();
 			lenta_position = state.lenta_position;
@@ -133,7 +133,7 @@ namespace MFST
 		while (k < MFST_DIAGN_NUMBER && lenta_position <= diagnosis[k].lenta_position)
 			k++;
 
-		if (rc = (k < MFST_DIAGN_NUMBER))
+		if ((rc = (k < MFST_DIAGN_NUMBER)))
 		{
 			diagnosis[k] = MfstDiagnosis(lenta_position, prc_step, nrule, nrulechain);
 
@@ -159,8 +159,8 @@ namespace MFST
             {
                 MFST_TRACE4("------>LENTA_END")
                 std::cout << "------------------------------------------------------------------------------------------   ------" << std::endl;
-                snprintf(buf, MFST_DIAGN_MAXSIZE, "%d: total lines %d, parsing completed without errors", 0, lex.tokens[lex.tokens.size() - 1].lineNum);
-                std::cout << std::setw(4) << std::left << 0 << ": total lines " << lex.tokens[lex.tokens.size() - 1].lineNum << ", parsing completed without errors" << std::endl;
+                snprintf(buf, MFST_DIAGN_MAXSIZE, "%d: total lines %d, parsing completed without errors", 0, lex.tokens[lex.tokens.size() - 1].position.line);
+                std::cout << std::setw(4) << std::left << 0 << ": total lines " << lex.tokens[lex.tokens.size() - 1].position.line << ", parsing completed without errors" << std::endl;
                 rc = true;
                 break;
         }
@@ -224,8 +224,7 @@ namespace MFST
 		{
 			errid = grebach.getRule(diagnosis[n].nrule).iderror;
 			Error::ERROR err = Error::geterror(errid);
-			snprintf(buf, MFST_DIAGN_MAXSIZE, "%d: line %d,%s", err.id, lex.tokens[lpos].lineNum+1, err.message);
-      std::cout << err.id << std::endl;
+			snprintf(buf, MFST_DIAGN_MAXSIZE, "%d: line %d,%s", err.id, lex.tokens[lpos].position.line+1, err.message.c_str());
 			rc = buf;
       throw ERROR_THROW(err.id-1);
 		}
@@ -236,6 +235,7 @@ namespace MFST
 	{
 		MfstState state;
 		GRB::Rule rule;
+    std::cout << std::endl << "\t\tRules\n";
 		for (unsigned short i = 0; i < storestate.size(); i++)
 		{
 			state = storestate.c[i];

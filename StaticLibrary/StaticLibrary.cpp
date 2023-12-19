@@ -3,9 +3,9 @@
 #include <cctype>
 
 extern "C" {
-  int Strlen(std::string str) {
-    return str.length();
-  }
+  int Strlen(const std::string& str) {
+  return str.length();
+}
 
 int convertToNum(const std::string& str) {
   int num = 0;

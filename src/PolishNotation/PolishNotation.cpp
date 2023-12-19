@@ -1,5 +1,6 @@
 #include "PolishNotation.h"
 #include "../Error/Error.h"
+#include "../Semantics/Sem.h"
 #include <iostream>
 #include <map>
 #include <memory>
@@ -40,13 +41,13 @@ bool checkParm(shared_ptr<Lexer::Identifier> &fn, Lexer::Token &token, short id)
   //   case Lexer::liter:
   //     break;
   // }
-  if (fn->parms[id].type != token.identifier->type) {
+  if (!fn->parms.empty() && fn->parms[id]->type != token.identifier->type) {
     return false;
   }
   return true;
 }
 
-Lexer::ValueType checkNotation(Lexer::Table &table, int id) {
+Lexer::ValueType checkNotation(Lexer::Table &table, int &id, Sem::Scope &scope) {
   string result{};
   queue<Lexer::Token> queue;
   stack<Lexer::Token> stack;
@@ -57,16 +58,25 @@ Lexer::ValueType checkNotation(Lexer::Table &table, int id) {
   short parm_size = 0;
 
   Lexer::ValueType returnType = Lexer::undef;
+  Lexer::ValueType tmpType = Lexer::undef;
+  ++id;
   int start = id, end = id;
   Lexer::Token token = table.tokens[id];
   do {
     switch (table.tokens[id].type) {
       case Lexer::identifier: {
+        if (table.tokens[id].identifier->type == Lexer::undef) {
+          auto result = checkIdentifier(&scope, table.tokens[id].identifier);
+          if (result == nullptr) { //   if identifier's declaration wasn't found
+            throw ERROR_THROW_POS(402, table.tokens[id].position);
+          }
+          tmpType = result->type;
+          table.tokens[id].identifier = result;
+        }
         if (table.tokens[id].identifier->isFunc) {  // IF FUNC
           fn = table.tokens[id].identifier;
           parm_size = fn->parms.size();
           if(returnType == Lexer::undef) {
-            cout << "1 RT: " << table.tokens[id].identifier->type << endl;
             returnType = table.tokens[id].identifier->type;
           } else {
             if (returnType != table.tokens[id].identifier->type)
@@ -76,17 +86,16 @@ Lexer::ValueType checkNotation(Lexer::Table &table, int id) {
           stack.push(table.tokens[id]);
         } else {                                    // IF NOT FUNC
           if (fnFlag) {
-            if(checkParm(fn, table.tokens[id], parm_id))
-              stack.push(table.tokens[id]);
-            else throw ERROR_THROW(406);
+            if(!checkParm(fn, table.tokens[id], parm_id))
+              throw ERROR_THROW(406);
+            stack.push(table.tokens[id]);
             ++parm_id;
           } else {
             if(returnType == Lexer::undef) {
-              cout << "2 RT: " << table.tokens[id].identifier->type << endl;
-              returnType = table.tokens[id].identifier->type;
-            } else {
-              if (returnType != table.tokens[id].identifier->type) {
-            cout << "3 RT: " << table.tokens[id].identifier->type << endl;
+              returnType = tmpType;
+            } 
+            else {
+              if (returnType != tmpType) {
                 return Lexer::undef;
               }
             }
@@ -97,8 +106,19 @@ Lexer::ValueType checkNotation(Lexer::Table &table, int id) {
         }
         break;
       }
+      case Lexer::truue:
+      case Lexer::faalse: {
+        result += table.tokens[id].value.first;
+        if (returnType == Lexer::undef)
+          returnType = table.tokens[id].value.second;
+        queue.push(table.tokens[id]);
+        result += ' ';
+        break;
+      }
       case Lexer::liter: {
-        result += table.tokens[id].value;
+        result += table.tokens[id].value.first;
+        if (returnType == Lexer::undef)
+          returnType = table.tokens[id].value.second;
         queue.push(table.tokens[id]);
         result += ' ';
         break;
@@ -176,9 +196,10 @@ Lexer::ValueType checkNotation(Lexer::Table &table, int id) {
     queue.push(stack.top());
     stack.pop();
   }
-  cout << "Result: " << result << endl;
 
-  printTable(table, start - 2, end + 2);
+  // cout << "Result: " << result << endl;
+
+  // printTable(table, start - 2, end + 2);
   size_t quSize = queue.size();
   // for (size_t i = start; i < end - quSize; i++) {
   size_t i = start;
@@ -189,6 +210,6 @@ Lexer::ValueType checkNotation(Lexer::Table &table, int id) {
   if (i < end)
     for (size_t ii = end - quSize, j = end - quSize; ii < end; ii++)
       table.tokens.erase(table.tokens.begin()+j);
-  printTable(table, start - 2, end + 2);
+  // printTable(table, start - 2, end + 2);
   return returnType;
 }

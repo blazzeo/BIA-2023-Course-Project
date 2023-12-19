@@ -724,6 +724,7 @@ CMakeFiles/main.dir/src/Lexer/newLexer.cpp.o: \
   /Users/ivanbraganets/kursovoy/src/Lexer/../In/In.h \
   /Users/ivanbraganets/kursovoy/src/Lexer/../Chains/../Lexer/newLexer.h \
   /Users/ivanbraganets/kursovoy/src/Lexer/../Error/Error.h \
+  /Users/ivanbraganets/kursovoy/src/Lexer/../Error/../Lexer/newLexer.h \
   /Users/ivanbraganets/kursovoy/src/Lexer/../fst/FST.h \
   /Users/ivanbraganets/kursovoy/src/Lexer/newLexer.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/fstream \
@@ -799,5 +800,4 @@ CMakeFiles/main.dir/src/Lexer/newLexer.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__filesystem/directory_options.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__filesystem/path_iterator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__filesystem/recursive_directory_iterator.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__filesystem/u8path.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/iostream
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__filesystem/u8path.h

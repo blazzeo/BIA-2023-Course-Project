@@ -11,16 +11,15 @@ main : i32 {
 	let str1[10]: char;
   str1 = '54321';
   let z: bool;
-  z = 1;
+  z = true;
 	if(z) {
-		let len : i32;
-		len = strlen(str1);
+		let len : i32 = Strlen(str1);
 		if (len == 10) {
 			print len;
 		};
 		print 'length is less than 10';
 	};
-  let num: i32;
-  num = convertToNum(str1);
+  let num: i32 = convertToNum(str1);
+  print num;
 	return 0;
 };

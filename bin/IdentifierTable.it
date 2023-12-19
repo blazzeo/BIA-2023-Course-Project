@@ -11,19 +11,13 @@
               x     undef     undef         
          square     undef     undef         
               x     undef     undef         
-           str1     undef     undef         
-           char     undef     undef     Func
+           str1    string                   
            str1     undef     undef         
               z      bool         0         
               z     undef     undef         
               z     undef     undef         
             len       i32         0         
             len     undef     undef         
-         strlen     undef     undef         
-           str1     undef     undef         
-            len     undef     undef         
             len     undef     undef         
             num       i32         0         
             num     undef     undef         
-   convertToNum     undef     undef         
-           str1     undef     undef         

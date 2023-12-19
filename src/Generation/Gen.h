@@ -4,22 +4,43 @@
 #include <fstream>
 #include <vector>
 
+#define ASM_EXT ".asm"
+
 using namespace std;
 
 namespace Gen {
-  struct AsmCode {
-		string Head = ".586P\n.MODEL FLAT, STDCALL\nincludelib kernel32.lib\nincludelib libucrt.lib\nincludelib ..\\Debug\\StaticLibrary.lib\nEXTRN convertToNum: PROC\nEXTRN Strlen: PROC\nExitProcess PROTO : DWORD\n\n";
-		string Stack = ".STACK 4096\n";
-    string Const = ".CONST\n\n";
-		string Data = ".DATA\n";
-		string Code = ".CODE\n\n";
+struct AsmCode {
+  string fileName;
+  ofstream* asmFile = nullptr;
 
-    vector<AsmCode> nextASMs;
-    string fileName;
+  string Head = ".586P\n\
+    .MODEL FLAT, STDCALL\n\
+    includelib kernel32.lib\n\
+    includelib libucrt.lib\n\
+    includelib ..\\Debug\
+    StaticLibrary.lib\n\
+    EXTRN convertToNum: PROC\n\
+    EXTRN Strlen: PROC\n\
+    ExitProcess PROTO : DWORD\n\n";
+  string Stack = ".STACK 4096\n";
+  string Const = ".CONST\n\n";
+  string Data = ".DATA\n";
+  string Code = ".CODE\n\n";
+
+  AsmCode(string name) : fileName(name) {
+    asmFile = new ofstream(name + ASM_EXT);
+  } 
+  ~AsmCode() {
+    delete asmFile;
+  }
 };
 
-  void GetHead(Sem::Scope&, Lexer::Table&, AsmCode&);
-  void GetData(Sem::Scope&, Lexer::Table&, AsmCode&);
-  void GetCode(Sem::Scope&, Lexer::Table&, AsmCode&);
-  AsmCode GenerateAsm(Sem::Scope &, Lexer::Table&);
+  
+  // void GetHead(Sem::Scope&, Lexer::Table&, AsmCode&);
+  // void GetData(Sem::Scope&, Lexer::Table&, AsmCode&);
+  // void GetCode(Sem::Scope&, Lexer::Table&, AsmCode&);
+  void GenerateAsm(Sem::Scope &, Lexer::Table&);
+  void GenerateExpr(AsmCode&, Sem::Scope&, size_t);
+  vector<vector<Lexer::Token>> parseIntoLines(Sem::Scope &);
+  string LexemString(vector<Lexer::Token> &tokens);
 };

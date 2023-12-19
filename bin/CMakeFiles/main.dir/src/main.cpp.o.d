@@ -1,7 +1,6 @@
 CMakeFiles/main.dir/src/main.cpp.o: \
   /Users/ivanbraganets/kursovoy/src/main.cpp \
-  /Users/ivanbraganets/kursovoy/src/Syntacsis/GRB.h \
-  /Users/ivanbraganets/kursovoy/src/Syntacsis/../Error/Error.h \
+  /Users/ivanbraganets/kursovoy/src/Error/Error.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/string \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__algorithm/max.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__algorithm/comp.h \
@@ -719,8 +718,9 @@ CMakeFiles/main.dir/src/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__functional/pointer_to_binary_function.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__functional/pointer_to_unary_function.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__functional/unary_negate.h \
-  /Users/ivanbraganets/kursovoy/src/WCHAR/WCHAR.h \
-  /Users/ivanbraganets/kursovoy/src/Error/Error.h \
+  /Users/ivanbraganets/kursovoy/src/Error/../Lexer/newLexer.h \
+  /Users/ivanbraganets/kursovoy/src/Error/../Lexer/../In/In.h \
+  /Users/ivanbraganets/kursovoy/src/Parm/Parm.h \
   /Users/ivanbraganets/kursovoy/src/Log/Log.h \
   /Users/ivanbraganets/kursovoy/src/Log/../In/In.h \
   /Users/ivanbraganets/kursovoy/src/Log/../Parm/Parm.h \
@@ -799,23 +799,22 @@ CMakeFiles/main.dir/src/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__filesystem/path_iterator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__filesystem/recursive_directory_iterator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__filesystem/u8path.h \
+  /Users/ivanbraganets/kursovoy/src/In/In.h \
   /Users/ivanbraganets/kursovoy/src/Out/Out.h \
   /Users/ivanbraganets/kursovoy/src/Out/../Parm/Parm.h \
-  /Users/ivanbraganets/kursovoy/src/Out/../WCHAR/WCHAR.h \
   /Users/ivanbraganets/kursovoy/src/Out/../Error/Error.h \
   /Users/ivanbraganets/kursovoy/src/Out/../Lexer/newLexer.h \
-  /Users/ivanbraganets/kursovoy/src/Out/../Lexer/../In/In.h \
   /Users/ivanbraganets/kursovoy/src/Lexer/newLexer.h \
-  /Users/ivanbraganets/kursovoy/src/Parm/Parm.h \
-  /Users/ivanbraganets/kursovoy/src/In/In.h \
-  /Users/ivanbraganets/kursovoy/src/Generation/Gen.h \
-  /Users/ivanbraganets/kursovoy/src/Generation/../Lexer/newLexer.h \
-  /Users/ivanbraganets/kursovoy/src/Generation/../Semantics/Sem.h \
-  /Users/ivanbraganets/kursovoy/src/Generation/../Semantics/../Error/Error.h \
-  /Users/ivanbraganets/kursovoy/src/Generation/../Semantics/../Lexer/newLexer.h \
-  /Users/ivanbraganets/kursovoy/src/Semantics/Sem.h \
+  /Users/ivanbraganets/kursovoy/src/Syntacsis/GRB.h \
+  /Users/ivanbraganets/kursovoy/src/Syntacsis/../Error/Error.h \
   /Users/ivanbraganets/kursovoy/src/Syntacsis/MFST.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/stack \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/deque \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/iostream \
-  /Users/ivanbraganets/kursovoy/src/Syntacsis/../Lexer/newLexer.h
+  /Users/ivanbraganets/kursovoy/src/Syntacsis/../Lexer/newLexer.h \
+  /Users/ivanbraganets/kursovoy/src/Semantics/Sem.h \
+  /Users/ivanbraganets/kursovoy/src/Semantics/../Error/Error.h \
+  /Users/ivanbraganets/kursovoy/src/Semantics/../Lexer/newLexer.h \
+  /Users/ivanbraganets/kursovoy/src/Generation/Gen.h \
+  /Users/ivanbraganets/kursovoy/src/Generation/../Lexer/newLexer.h \
+  /Users/ivanbraganets/kursovoy/src/Generation/../Semantics/Sem.h

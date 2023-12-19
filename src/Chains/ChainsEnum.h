@@ -345,13 +345,11 @@ Fst::RELATION('9',1)),\
                 Fst::NODE(1, Fst::RELATION('3',2)), \
                 Fst::NODE(1, Fst::RELATION('2',3)), \
                 Fst::NODE())
-#define STR_LITER Fst::CHAIN(7, Lexer::string, \
-                Fst::NODE(1, Fst::RELATION('s',1)), \
-                Fst::NODE(1, Fst::RELATION('t',2)), \
-                Fst::NODE(1, Fst::RELATION('r',3)), \
-                Fst::NODE(1, Fst::RELATION('i',4)), \
-                Fst::NODE(1, Fst::RELATION('n',5)), \
-                Fst::NODE(1, Fst::RELATION('g',6)), \
+#define STR_LITER Fst::CHAIN(5, Lexer::string, \
+                Fst::NODE(1, Fst::RELATION('c',1)), \
+                Fst::NODE(1, Fst::RELATION('h',2)), \
+                Fst::NODE(1, Fst::RELATION('a',3)), \
+                Fst::NODE(1, Fst::RELATION('r',4)), \
                 Fst::NODE())
 #define BOOL_LITER Fst::CHAIN(5, Lexer::bl, \
                 Fst::NODE(1, Fst::RELATION('b',1)), \
@@ -396,4 +394,17 @@ Fst::RELATION('9',1)),\
 #define NEQUAL Fst::CHAIN(3, Lexer::nequal, \
                 Fst::NODE(1, Fst::RELATION('!',1)), \
                 Fst::NODE(1, Fst::RELATION('=',2)), \
+                Fst::NODE())
+#define TRUE Fst::CHAIN(5, Lexer::truue, \
+                Fst::NODE(1, Fst::RELATION('t',1)), \
+                Fst::NODE(1, Fst::RELATION('r',2)), \
+                Fst::NODE(1, Fst::RELATION('u',3)), \
+                Fst::NODE(1, Fst::RELATION('e',4)), \
+                Fst::NODE())
+#define FALSE Fst::CHAIN(6, Lexer::faalse, \
+                Fst::NODE(1, Fst::RELATION('f',1)), \
+                Fst::NODE(1, Fst::RELATION('a',2)), \
+                Fst::NODE(1, Fst::RELATION('l',3)), \
+                Fst::NODE(1, Fst::RELATION('s',4)), \
+                Fst::NODE(1, Fst::RELATION('e',5)), \
                 Fst::NODE())

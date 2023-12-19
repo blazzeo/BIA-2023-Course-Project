@@ -393,30 +393,6 @@ src/Syntacsis/MFST.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.s
 .PHONY : src/Syntacsis/MFST.cpp.s
 
-src/WCHAR/WCHAR.o: src/WCHAR/WCHAR.cpp.o
-.PHONY : src/WCHAR/WCHAR.o
-
-# target to build an object file
-src/WCHAR/WCHAR.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.o
-.PHONY : src/WCHAR/WCHAR.cpp.o
-
-src/WCHAR/WCHAR.i: src/WCHAR/WCHAR.cpp.i
-.PHONY : src/WCHAR/WCHAR.i
-
-# target to preprocess a source file
-src/WCHAR/WCHAR.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.i
-.PHONY : src/WCHAR/WCHAR.cpp.i
-
-src/WCHAR/WCHAR.s: src/WCHAR/WCHAR.cpp.s
-.PHONY : src/WCHAR/WCHAR.s
-
-# target to generate assembly for a file
-src/WCHAR/WCHAR.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.s
-.PHONY : src/WCHAR/WCHAR.cpp.s
-
 src/fst/Fst.o: src/fst/Fst.cpp.o
 .PHONY : src/fst/Fst.o
 
@@ -507,9 +483,6 @@ help:
 	@echo "... src/Syntacsis/MFST.o"
 	@echo "... src/Syntacsis/MFST.i"
 	@echo "... src/Syntacsis/MFST.s"
-	@echo "... src/WCHAR/WCHAR.o"
-	@echo "... src/WCHAR/WCHAR.i"
-	@echo "... src/WCHAR/WCHAR.s"
 	@echo "... src/fst/Fst.o"
 	@echo "... src/fst/Fst.i"
 	@echo "... src/fst/Fst.s"

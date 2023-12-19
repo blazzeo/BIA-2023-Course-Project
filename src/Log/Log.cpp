@@ -14,7 +14,6 @@ LOG getlog(char* logfile) {
     char* filename = logfile; 
     LOG log;
     strcpy(log.logfile, logfile);
-    //log.logfile = {*logfile};
     log.stream = new std::ofstream(filename);
     if (!log.stream->is_open()) {
         throw ERROR_THROW(112);
@@ -73,12 +72,12 @@ void WriteIn(LOG log, In::IN in) {
 void WriteError(LOG log, Error::ERROR e) {
   if (log.stream && log.stream->is_open()) {
     *log.stream << "Error " << e.id << ": " << e.message <<
-      ", line " << e.inext.line <<
-      ", position " << e.inext.col << std::endl << std::endl;
+      ", line " << e.position.line <<
+      ", position " << e.position.col << std::endl << std::endl;
   } else {
     std::cout << "Error " << e.id << ": " << e.message <<
-      ", line " << e.inext.line <<
-      ", position " << e.inext.col << std::endl << std::endl;
+      ", line " << e.position.line <<
+      ", position " << e.position.col << std::endl << std::endl;
   }
 }
 

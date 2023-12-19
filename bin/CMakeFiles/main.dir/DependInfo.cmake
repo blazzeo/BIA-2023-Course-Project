@@ -19,7 +19,6 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/ivanbraganets/kursovoy/src/Semantics/Sem.cpp" "CMakeFiles/main.dir/src/Semantics/Sem.cpp.o" "gcc" "CMakeFiles/main.dir/src/Semantics/Sem.cpp.o.d"
   "/Users/ivanbraganets/kursovoy/src/Syntacsis/GRB.cpp" "CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.o" "gcc" "CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.o.d"
   "/Users/ivanbraganets/kursovoy/src/Syntacsis/MFST.cpp" "CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o" "gcc" "CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o.d"
-  "/Users/ivanbraganets/kursovoy/src/WCHAR/WCHAR.cpp" "CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.o" "gcc" "CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.o.d"
   "/Users/ivanbraganets/kursovoy/src/fst/Fst.cpp" "CMakeFiles/main.dir/src/fst/Fst.cpp.o" "gcc" "CMakeFiles/main.dir/src/fst/Fst.cpp.o.d"
   "/Users/ivanbraganets/kursovoy/src/main.cpp" "CMakeFiles/main.dir/src/main.cpp.o" "gcc" "CMakeFiles/main.dir/src/main.cpp.o.d"
   )

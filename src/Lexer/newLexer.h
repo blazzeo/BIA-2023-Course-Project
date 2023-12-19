@@ -2,6 +2,7 @@
 #include <memory>
 #include <string>
 #include <optional>
+#include <utility>
 #include <variant>
 #include <vector>
 #include "../In/In.h"
@@ -41,7 +42,9 @@ enum TokenType {
     greater,
     mod,
     equal,
-    nequal
+    nequal,
+    truue,
+    faalse
 };
 
 enum ValueType {
@@ -57,51 +60,40 @@ struct Identifier {
   size_t size = 0;
   size_t offset = 0;
   bool isFunc = 0;
-  std::variant<int, std::string, bool> value;
-  std::vector<Identifier> parms{};
+  std::variant<int, std::string, bool> value = "undef";
+  std::vector<std::shared_ptr<Lexer::Identifier>> parms{};
 
-  Identifier(std::string nm, ValueType tp, bool isfunc = 0)
-  : name(nm), type(tp), isFunc(isfunc)
-  {
-    switch(tp) {
-      case i:
-        value = 0;
-        break;
-      case str:
-        value = "";
-        break;
-      case bol:
-        value = false;
-        break;
-      case undef:
-        value = "undef";
-        break;
-    }
-  }
+  Identifier(const std::string &nm, ValueType tp, bool isfunc = 0)
+  : name(nm), type(tp), isFunc(isfunc) {}
 };
 
-const std::string tokenTypes = " ;{}()[]vvvv,=ittmlrfdput:?@vvvvv";
+const std::string tokenTypes = " ;{}()[]vvvv,=ittmlrfdput:?@vvvvvll";
+
+struct Position {
+  short line = 0;
+  short col = 0;
+};
 
 struct Token {
   TokenType type;
-  unsigned short lineNum;
   char lexema = ' ';
+  Position position;
   std::shared_ptr<Identifier> identifier = nullptr;
-  std::string value;
+  std::pair<std::string, ValueType> value;
 
   Token()
-    : type(undefined), lineNum(-1) {}
-  Token(TokenType tp, short ln, std::string val = "")
-    : type(tp), lineNum(ln), value(val) {
+    : type(undefined) {}
+  Token(TokenType tp, short ln, short col, std::string val = "", ValueType valueType = i)
+    : type(tp), position({ln, col}), value({val,valueType}) {
     lexema = tokenTypes[tp];
   }
-  Token(TokenType tp, short ln, std::shared_ptr<Identifier> ident)
-    : type(tp), lineNum(ln), identifier(ident) {
+  Token(TokenType tp, short ln, short col, std::shared_ptr<Identifier> ident)
+    : type(tp), position({ln, col}), identifier(ident) {
     lexema = tokenTypes[tp];
   }
   Token& operator=(Token oldToken) {
     this->type = oldToken.type;
-    this->lineNum = oldToken.lineNum;
+    this->position = oldToken.position;
     this->lexema = oldToken.lexema;
     this->identifier = oldToken.identifier;
     this->value = oldToken.value;

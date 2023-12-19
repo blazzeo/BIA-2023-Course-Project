@@ -1,6 +1,5 @@
 #pragma once
 #include "../Parm/Parm.h"
-#include "../WCHAR/WCHAR.h"
 #include "../Error/Error.h"
 #include "../Lexer/newLexer.h"
 #include <fstream>

@@ -722,6 +722,8 @@ CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__string/extern_template_lists.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/string_view \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__fwd/string_view.h \
+  /Users/ivanbraganets/kursovoy/src/Syntacsis/../Error/../Lexer/newLexer.h \
+  /Users/ivanbraganets/kursovoy/src/Syntacsis/../Error/../Lexer/../In/In.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__locale \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/locale.h \
@@ -778,5 +780,4 @@ CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__bsd_locale_defaults.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/cstdarg \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/iostream \
-  /Users/ivanbraganets/kursovoy/src/Syntacsis/../Lexer/newLexer.h \
-  /Users/ivanbraganets/kursovoy/src/Syntacsis/../Lexer/../In/In.h
+  /Users/ivanbraganets/kursovoy/src/Syntacsis/../Lexer/newLexer.h

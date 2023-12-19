@@ -1,42 +1,41 @@
-#include "Syntacsis/GRB.h"
+//  BIA-2023 Language
 #include "Error/Error.h"
+#include "Parm/Parm.h"
 #include "Log/Log.h"
+#include "In/In.h"
 #include "Out/Out.h"
 #include "Lexer/newLexer.h"
-#include "Parm/Parm.h"
-#include "In/In.h"
-#include "Generation/Gen.h"
-#include "Semantics/Sem.h"
+#include "Syntacsis/GRB.h"
 #include "Syntacsis/MFST.h"
-
-#include <iostream>
+#include "Semantics/Sem.h"
+#include "Generation/Gen.h"
 
 int main(int argc, char* argv[]) {
     Out::OUT out;
+    Log::LOG log;
     try {
-        Parm::PARM parm = Parm::getparm(argc, argv);
-        out = Out::getOut(parm.out);
-        Log::LOG log = Log::getlog(parm.log);
+        Parm::PARM parms = Parm::getparm(argc, argv);
+        out = Out::getOut(parms.out);
+        log = Log::getlog(parms.log);
         Log::WriteLog(log);
-        Log::WriteParm(log, parm);
-        In::IN in = In::getin(parm.in);
+        Log::WriteParm(log, parms);
+        In::IN in = In::getin(parms.in);
     // LEXER
         Lexer::Table table = Lexer::tokenize(in);
-        Lexer::generateLog(table);
-    // SYNTACSIS
+        // Lexer::generateLog(table);
+    // PARSER
         MFST_TRACE_START;
         MFST::Mfst mfst(table, GRB::getGreibach());
         mfst.start();
         mfst.savededucation();
-        std::cout << std::endl << "\t\tRules\n";
-        mfst.printrules();
-    // // SEMANTICS
+        // mfst.printrules();
+    // SEMANTICS
         int i = 0;
         Sem::Scope structure = Sem::scopenize(&table, i);
-        Sem::PrintTable(structure);
-    // // GENERATION
+        // Sem::PrintTable(structure);
+    // GENERATION
         Gen::GenerateAsm(structure, table);
-        Out::WriteOut(out, table);
+        // Out::WriteOut(out, table);
         Log::WriteIn(log, in);
         Log::Close(log);
     }
@@ -45,9 +44,7 @@ int main(int argc, char* argv[]) {
         //     Out::WriteError(out, e);
         //     return 1;
         // } else {
-            std::cout << "Error " << e.id << ": " << e.message << '\n' << std::endl;
-            std::cout << "line " << e.inext.line+1
-                << "\tposition " << e.inext.col << "\n\n";
+            Error::printErorr(e);
             return 1;
         // }
     }

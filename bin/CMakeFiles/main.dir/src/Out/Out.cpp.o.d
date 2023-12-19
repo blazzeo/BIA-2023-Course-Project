@@ -718,11 +718,11 @@ CMakeFiles/main.dir/src/Out/Out.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__functional/pointer_to_binary_function.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__functional/pointer_to_unary_function.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__functional/unary_negate.h \
+  /Users/ivanbraganets/kursovoy/src/Out/../Error/../Lexer/newLexer.h \
+  /Users/ivanbraganets/kursovoy/src/Out/../Error/../Lexer/../In/In.h \
   /Users/ivanbraganets/kursovoy/src/Out/../Lexer/newLexer.h \
-  /Users/ivanbraganets/kursovoy/src/Out/../Lexer/../In/In.h \
   /Users/ivanbraganets/kursovoy/src/Out/../Parm/Parm.h \
   /Users/ivanbraganets/kursovoy/src/Out/../Out/Out.h \
-  /Users/ivanbraganets/kursovoy/src/Out/../WCHAR/WCHAR.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/fstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__locale \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/locale.h \

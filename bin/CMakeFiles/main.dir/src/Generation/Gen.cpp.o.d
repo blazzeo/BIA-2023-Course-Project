@@ -722,6 +722,7 @@ CMakeFiles/main.dir/src/Generation/Gen.cpp.o: \
   /Users/ivanbraganets/kursovoy/src/Generation/../Lexer/../In/In.h \
   /Users/ivanbraganets/kursovoy/src/Generation/../Semantics/Sem.h \
   /Users/ivanbraganets/kursovoy/src/Generation/../Semantics/../Error/Error.h \
+  /Users/ivanbraganets/kursovoy/src/Generation/../Semantics/../Error/../Lexer/newLexer.h \
   /Users/ivanbraganets/kursovoy/src/Generation/../Semantics/../Lexer/newLexer.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/fstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__locale \

@@ -1,7 +1,6 @@
 CMakeFiles/main.dir/src/In/In.cpp.o: \
   /Users/ivanbraganets/kursovoy/src/In/In.cpp \
   /Users/ivanbraganets/kursovoy/src/In/In.h \
-  /Users/ivanbraganets/kursovoy/src/In/../WCHAR/WCHAR.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/fstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__algorithm/max.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__algorithm/comp.h \
@@ -794,4 +793,6 @@ CMakeFiles/main.dir/src/In/In.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__filesystem/recursive_directory_iterator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__filesystem/u8path.h \
   /Users/ivanbraganets/kursovoy/src/In/../Error/Error.h \
+  /Users/ivanbraganets/kursovoy/src/In/../Error/../Lexer/newLexer.h \
+  /Users/ivanbraganets/kursovoy/src/In/../Error/../Lexer/../In/In.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/iostream

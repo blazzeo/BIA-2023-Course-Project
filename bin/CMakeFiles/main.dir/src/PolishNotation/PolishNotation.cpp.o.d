@@ -720,6 +720,10 @@ CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__functional/pointer_to_unary_function.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__functional/unary_negate.h \
   /Users/ivanbraganets/kursovoy/src/PolishNotation/../Lexer/../In/In.h \
+  /Users/ivanbraganets/kursovoy/src/PolishNotation/../Semantics/Sem.h \
+  /Users/ivanbraganets/kursovoy/src/PolishNotation/../Semantics/../Error/Error.h \
+  /Users/ivanbraganets/kursovoy/src/PolishNotation/../Semantics/../Error/../Lexer/newLexer.h \
+  /Users/ivanbraganets/kursovoy/src/PolishNotation/../Semantics/../Lexer/newLexer.h \
   /Users/ivanbraganets/kursovoy/src/PolishNotation/../Error/Error.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/ios \

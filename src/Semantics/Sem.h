@@ -14,8 +14,8 @@ struct Scope {
         std::string name = "undef";
     } specs;
     size_t offset_length = 0;
-    std::vector<Lexer::Identifier> Identifiers;
-    std::vector<Lexer::Identifier> parms;
+    std::vector<std::shared_ptr<Lexer::Identifier>> Identifiers;
+    std::vector<std::shared_ptr<Lexer::Identifier>> parms;
     Scope* prevScope = nullptr;
     std::vector<Scope> nextScopes;
     std::vector<Lexer::Token> innerCode;
@@ -23,5 +23,6 @@ struct Scope {
 
 Scope scopenize(Lexer::Table*, int&, Scope* = nullptr);
 void PrintTable(Scope, short = 0);
+std::shared_ptr<Lexer::Identifier> checkIdentifier(Scope *scope, std::shared_ptr<Lexer::Identifier> &ident);
 
 }

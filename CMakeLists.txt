@@ -16,7 +16,6 @@ add_executable(main
     src/fst/Fst.cpp
     src/Lexer/newLexer.cpp
     src/Parm/Parm.cpp
-    src/WCHAR/WCHAR.cpp
     src/Syntacsis/GRB.cpp
     src/Syntacsis/MFST.cpp
     src/Semantics/Sem.cpp

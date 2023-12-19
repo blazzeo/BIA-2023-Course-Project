@@ -20,7 +20,6 @@ IN getin(char infile[]) {
 
     in.size = size;
 
-    // setlocale(LC_ALL, "ru_RU.CP1251");
     unsigned char* pText = in.text;
 
     for (size_t col=0, line=0, i=0; i < size; ++col, ++i) {
@@ -36,13 +35,10 @@ IN getin(char infile[]) {
                 std::cout << (int)ch << std::endl;
                setlocale(LC_ALL, "en_US.UTF-8");
                file.close();
-                delete []filename;
-               throw ERROR_THROW_IN(111, line, col);
+               throw ERROR_THROW_LC(111, line, col);
             case IN::T :
-               {
-                   *pText = ch, pText++;
-                   break;
-               }
+               *pText = ch, pText++;
+               break;
            case IN::I :
                in.ignor++, in.size--; continue;
            default:
@@ -53,8 +49,6 @@ IN getin(char infile[]) {
 
     *pText = '\0';
     file.close();
-    delete []filename;
-    // setlocale(LC_ALL, "en_US.UTF-8");
     return in;
 }
 };

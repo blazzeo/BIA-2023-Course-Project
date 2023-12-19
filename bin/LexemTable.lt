@@ -1,93 +1,86 @@
 ---------------- LexemTable -----------------
            Type     Lexem   LineNum     Value
-             fn         f         0
-     Identifier         i         0
-          Colon         :         0
-            i32         t         0
-      Open Parm         (         0
-     Identifier         i         0
-          Colon         :         0
-            i32         t         0
-     Close Parm         )         0
-   Open Bracket         {         0
-         return         r         1
+             fn         f         1
      Identifier         i         1
-              *         v         1
+          Colon         :         1
+            i32         t         1
+      Open Parm         (         1
      Identifier         i         1
-              ;         ;         1
-  Close Bracket         }         2
+          Colon         :         1
+            i32         t         1
+     Close Parm         )         1
+   Open Bracket         {         1
+         return         r         2
+     Identifier         i         2
+              *         v         2
+     Identifier         i         2
               ;         ;         2
-           main         m         4
-          Colon         :         4
-            i32         t         4
-   Open Bracket         {         4
-            let         d         5
-     Identifier         i         5
+  Close Bracket         }         3
+              ;         ;         3
+           main         m         5
           Colon         :         5
             i32         t         5
-              ;         ;         5
+   Open Bracket         {         5
+            let         d         6
      Identifier         i         6
-              =         =         6
-        Literal         l         6        15
+          Colon         :         6
+            i32         t         6
               ;         ;         6
-            let         d         7
      Identifier         i         7
-          Colon         :         7
-            i32         t         7
+              =         =         7
+        Literal         l         7        15
               ;         ;         7
+            let         d         8
      Identifier         i         8
-              =         =         8
-        Literal         l         8         2
-              *         v         8
-      Open Parm         (         8
-     Identifier         i         8
-      Open Parm         (         8
-        Literal         l         8        20
-     Close Parm         )         8
-              +         v         8
-        Literal         l         8         4
-     Close Parm         )         8
+          Colon         :         8
+            i32         t         8
               ;         ;         8
-          print         p         9
      Identifier         i         9
+              =         =         9
+        Literal         l         9         2
+              *         v         9
+      Open Parm         (         9
+     Identifier         i         9
+      Open Parm         (         9
+        Literal         l         9        20
+     Close Parm         )         9
+              +         v         9
+        Literal         l         9         4
+     Close Parm         )         9
               ;         ;         9
-            let         d        10
-     Identifier         i        10
-  Open Priority         [        10
-        Literal         l        10        10
- Close Priority         ]        10
-          Colon         :        10
+          print         p        10
      Identifier         i        10
               ;         ;        10
+            let         d        11
      Identifier         i        11
-              =         =        11
-        Literal         l        11     54321
+  Open Priority         [        11
+        Literal         l        11        10
+ Close Priority         ]        11
+          Colon         :        11
+         string         t        11
               ;         ;        11
-            let         d        12
      Identifier         i        12
-          Colon         :        12
-           bool         t        12
+              =         =        12
+        Literal         l        12     54321
               ;         ;        12
+            let         d        13
      Identifier         i        13
-              =         =        13
-        Literal         l        13         1
+          Colon         :        13
+           bool         t        13
               ;         ;        13
-             if         ?        14
-      Open Parm         (        14
      Identifier         i        14
-     Close Parm         )        14
-   Open Bracket         {        14
-            let         d        15
+              =         =        14
+                        l        14
+              ;         ;        14
+             if         ?        15
+      Open Parm         (        15
      Identifier         i        15
-          Colon         :        15
-            i32         t        15
-              ;         ;        15
+     Close Parm         )        15
+   Open Bracket         {        15
+            let         d        16
      Identifier         i        16
-              =         =        16
-     Identifier         i        16
-      Open Parm         (        16
-     Identifier         i        16
-     Close Parm         )        16
+          Colon         :        16
+            i32         t        16
               ;         ;        16
              if         ?        17
       Open Parm         (        17
@@ -111,12 +104,8 @@
           Colon         :        22
             i32         t        22
               ;         ;        22
+          print         p        23
      Identifier         i        23
-              =         =        23
-     Identifier         i        23
-      Open Parm         (        23
-     Identifier         i        23
-     Close Parm         )        23
               ;         ;        23
          return         r        24
         Literal         l        24         0

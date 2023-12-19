@@ -181,24 +181,10 @@ CMakeFiles/main.dir/src/Parm/Parm.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/Parm/Parm.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ivanbraganets/kursovoy/src/Parm/Parm.cpp -o CMakeFiles/main.dir/src/Parm/Parm.cpp.s
 
-CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.o: /Users/ivanbraganets/kursovoy/src/WCHAR/WCHAR.cpp
-CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ivanbraganets/kursovoy/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.o -MF CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.o.d -o CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.o -c /Users/ivanbraganets/kursovoy/src/WCHAR/WCHAR.cpp
-
-CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ivanbraganets/kursovoy/src/WCHAR/WCHAR.cpp > CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.i
-
-CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ivanbraganets/kursovoy/src/WCHAR/WCHAR.cpp -o CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.s
-
 CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.o: /Users/ivanbraganets/kursovoy/src/Syntacsis/GRB.cpp
 CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ivanbraganets/kursovoy/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ivanbraganets/kursovoy/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.o -MF CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.o.d -o CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.o -c /Users/ivanbraganets/kursovoy/src/Syntacsis/GRB.cpp
 
 CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.i: cmake_force
@@ -212,7 +198,7 @@ CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.s: cmake_force
 CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o: /Users/ivanbraganets/kursovoy/src/Syntacsis/MFST.cpp
 CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ivanbraganets/kursovoy/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ivanbraganets/kursovoy/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o -MF CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o.d -o CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o -c /Users/ivanbraganets/kursovoy/src/Syntacsis/MFST.cpp
 
 CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.i: cmake_force
@@ -226,7 +212,7 @@ CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.s: cmake_force
 CMakeFiles/main.dir/src/Semantics/Sem.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/Semantics/Sem.cpp.o: /Users/ivanbraganets/kursovoy/src/Semantics/Sem.cpp
 CMakeFiles/main.dir/src/Semantics/Sem.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ivanbraganets/kursovoy/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/main.dir/src/Semantics/Sem.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ivanbraganets/kursovoy/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/main.dir/src/Semantics/Sem.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/Semantics/Sem.cpp.o -MF CMakeFiles/main.dir/src/Semantics/Sem.cpp.o.d -o CMakeFiles/main.dir/src/Semantics/Sem.cpp.o -c /Users/ivanbraganets/kursovoy/src/Semantics/Sem.cpp
 
 CMakeFiles/main.dir/src/Semantics/Sem.cpp.i: cmake_force
@@ -240,7 +226,7 @@ CMakeFiles/main.dir/src/Semantics/Sem.cpp.s: cmake_force
 CMakeFiles/main.dir/src/Generation/Gen.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/Generation/Gen.cpp.o: /Users/ivanbraganets/kursovoy/src/Generation/Gen.cpp
 CMakeFiles/main.dir/src/Generation/Gen.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ivanbraganets/kursovoy/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/main.dir/src/Generation/Gen.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ivanbraganets/kursovoy/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/main.dir/src/Generation/Gen.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/Generation/Gen.cpp.o -MF CMakeFiles/main.dir/src/Generation/Gen.cpp.o.d -o CMakeFiles/main.dir/src/Generation/Gen.cpp.o -c /Users/ivanbraganets/kursovoy/src/Generation/Gen.cpp
 
 CMakeFiles/main.dir/src/Generation/Gen.cpp.i: cmake_force
@@ -254,7 +240,7 @@ CMakeFiles/main.dir/src/Generation/Gen.cpp.s: cmake_force
 CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.o: /Users/ivanbraganets/kursovoy/src/PolishNotation/PolishNotation.cpp
 CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ivanbraganets/kursovoy/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ivanbraganets/kursovoy/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.o -MF CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.o.d -o CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.o -c /Users/ivanbraganets/kursovoy/src/PolishNotation/PolishNotation.cpp
 
 CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.i: cmake_force
@@ -275,7 +261,6 @@ main_OBJECTS = \
 "CMakeFiles/main.dir/src/fst/Fst.cpp.o" \
 "CMakeFiles/main.dir/src/Lexer/newLexer.cpp.o" \
 "CMakeFiles/main.dir/src/Parm/Parm.cpp.o" \
-"CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.o" \
 "CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.o" \
 "CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o" \
 "CMakeFiles/main.dir/src/Semantics/Sem.cpp.o" \
@@ -293,7 +278,6 @@ main: CMakeFiles/main.dir/src/Log/Log.cpp.o
 main: CMakeFiles/main.dir/src/fst/Fst.cpp.o
 main: CMakeFiles/main.dir/src/Lexer/newLexer.cpp.o
 main: CMakeFiles/main.dir/src/Parm/Parm.cpp.o
-main: CMakeFiles/main.dir/src/WCHAR/WCHAR.cpp.o
 main: CMakeFiles/main.dir/src/Syntacsis/GRB.cpp.o
 main: CMakeFiles/main.dir/src/Syntacsis/MFST.cpp.o
 main: CMakeFiles/main.dir/src/Semantics/Sem.cpp.o
@@ -301,7 +285,7 @@ main: CMakeFiles/main.dir/src/Generation/Gen.cpp.o
 main: CMakeFiles/main.dir/src/PolishNotation/PolishNotation.cpp.o
 main: CMakeFiles/main.dir/build.make
 main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/ivanbraganets/kursovoy/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/ivanbraganets/kursovoy/bin/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
