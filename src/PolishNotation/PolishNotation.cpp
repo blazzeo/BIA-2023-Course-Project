@@ -201,7 +201,6 @@ Lexer::ValueType checkNotation(Lexer::Table &table, int &id, Sem::Scope &scope) 
 
   // printTable(table, start - 2, end + 2);
   size_t quSize = queue.size();
-  // for (size_t i = start; i < end - quSize; i++) {
   size_t i = start;
     while (!queue.empty()) {
       table.tokens[i++] = queue.front();
@@ -211,5 +210,6 @@ Lexer::ValueType checkNotation(Lexer::Table &table, int &id, Sem::Scope &scope) 
     for (size_t ii = end - quSize, j = end - quSize; ii < end; ii++)
       table.tokens.erase(table.tokens.begin()+j);
   // printTable(table, start - 2, end + 2);
+  id = start + quSize;
   return returnType;
 }

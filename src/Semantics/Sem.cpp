@@ -13,7 +13,6 @@ namespace Sem {
 std::shared_ptr<Lexer::Identifier> checkIdentifier(Scope *scope, std::shared_ptr<Lexer::Identifier> &ident) {
   std::shared_ptr<Lexer::Identifier> result = nullptr;
   for (auto inIdent : scope->Identifiers) { //  check in Identifiers
-    std::cout << inIdent->name << std::endl;
     if (inIdent->name == ident->name) {
       return inIdent;
       break;
@@ -95,6 +94,7 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
   }
 
   Lexer::ValueType Expr = Lexer::undef; //  Expression Type
+  Lexer::Token tmpIdent;
   bool returnFound = false;             //  returnFlag
 
   while (id < table->tokens.size()) {
@@ -133,6 +133,7 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
           table->tokens[id].identifier = result;
           // scope.offset_length += result->size;
         }
+        tmpIdent = table->tokens[id];
         break;
       }
       case Lexer::open_app_brackets : {
@@ -149,12 +150,15 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
       case Lexer::equals: { //  PolishNotation Check
         Expr = checkNotation(*table, id, scope);
         // if (table->tokens[id-1].identifier->type != Expr)
-        if (table->tokens[id-1].type == Lexer::identifier && table->tokens[id-1].identifier->type != Expr) {
-          throw ERROR_THROW_POS(407, table->tokens[id-1].position);
-        } else if (table->tokens[id-3].type == Lexer::identifier && table->tokens[id-3].identifier->type != Expr) {
-          throw ERROR_THROW_POS(407, table->tokens[id-1].position);
-        } else if (table->tokens[id-6].type == Lexer::identifier && table->tokens[id-6].identifier->type != Expr) {
-          throw ERROR_THROW_POS(407, table->tokens[id-1].position);
+        // if (table->tokens[id-1].type == Lexer::identifier && table->tokens[id-1].identifier->type != Expr) {
+        //   throw ERROR_THROW_POS(407, table->tokens[id-1].position);
+        // } else if (table->tokens[id-3].type == Lexer::identifier && table->tokens[id-3].identifier->type != Expr) {
+        //   throw ERROR_THROW_POS(407, table->tokens[id-1].position);
+        // } else if (table->tokens[id-6].type == Lexer::identifier && table->tokens[id-6].identifier->type != Expr) {
+        //   throw ERROR_THROW_POS(407, table->tokens[id-1].position);
+        // }
+        if (tmpIdent.identifier->type != Expr) {
+          throw ERROR_THROW_POS(407, tmpIdent.position);
         }
         break;
       }

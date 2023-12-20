@@ -817,4 +817,5 @@ CMakeFiles/main.dir/src/main.cpp.o: \
   /Users/ivanbraganets/kursovoy/src/Semantics/../Lexer/newLexer.h \
   /Users/ivanbraganets/kursovoy/src/Generation/Gen.h \
   /Users/ivanbraganets/kursovoy/src/Generation/../Lexer/newLexer.h \
-  /Users/ivanbraganets/kursovoy/src/Generation/../Semantics/Sem.h
+  /Users/ivanbraganets/kursovoy/src/Generation/../Semantics/Sem.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/sstream

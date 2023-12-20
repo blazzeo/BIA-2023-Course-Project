@@ -34,7 +34,8 @@ int main(int argc, char* argv[]) {
         Sem::Scope structure = Sem::scopenize(&table, i);
         // Sem::PrintTable(structure);
     // GENERATION
-        Gen::GenerateAsm(structure, table);
+    // auto ASM = Gen::CreateAsmFile("BIA-2023");
+    // Gen::GenerateAsm(ASM, structure);
         // Out::WriteOut(out, table);
         Log::WriteIn(log, in);
         Log::Close(log);

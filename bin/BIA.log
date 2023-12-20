@@ -1,9 +1,9 @@
-----	Protocol	-----	18.12.23 10:00:46	----
+----	Protocol	-----	20.12.23 12:19:46	----
 ----	Parametrs	-----
 -in: BIA
 -out: BIA.out
 -log: BIA.log
 ----	Initial data	----
-Total Lines: 25
-Total symbols: 344
+Total Lines: 26
+Total symbols: 387
 Total ignored: 0

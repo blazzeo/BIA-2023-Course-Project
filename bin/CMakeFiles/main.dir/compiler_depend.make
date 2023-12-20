@@ -1397,6 +1397,7 @@ CMakeFiles/main.dir/src/Generation/Gen.cpp.o: /Users/ivanbraganets/kursovoy/src/
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/ctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/cwchar \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/cwctype \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/deque \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/errno.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/exception \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/filesystem \
@@ -1419,6 +1420,8 @@ CMakeFiles/main.dir/src/Generation/Gen.cpp.o: /Users/ivanbraganets/kursovoy/src/
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/optional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/ostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/ratio \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/sstream \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/stack \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/stddef.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/stdexcept \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/stdint.h \
@@ -10001,6 +10004,7 @@ CMakeFiles/main.dir/src/main.cpp.o: /Users/ivanbraganets/kursovoy/src/main.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/optional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/ostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/ratio \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/sstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/stack \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/stddef.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/stdexcept \
@@ -10193,8 +10197,6 @@ CMakeFiles/main.dir/src/main.cpp.o: /Users/ivanbraganets/kursovoy/src/main.cpp \
 
 /Users/ivanbraganets/kursovoy/src/PolishNotation/PolishNotation.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/stack:
-
 /Users/ivanbraganets/kursovoy/src/Parm/Parm.cpp:
 
 /Users/ivanbraganets/kursovoy/src/Out/Out.h:
@@ -10206,6 +10208,10 @@ CMakeFiles/main.dir/src/main.cpp.o: /Users/ivanbraganets/kursovoy/src/main.cpp \
 /Users/ivanbraganets/kursovoy/src/Generation/Gen.h:
 
 /Users/ivanbraganets/kursovoy/src/Semantics/Sem.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/stack:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/iomanip:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/filesystem:
 
@@ -11575,6 +11581,8 @@ CMakeFiles/main.dir/src/main.cpp.o: /Users/ivanbraganets/kursovoy/src/main.cpp \
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__functional/weak_result_type.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/sstream:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__type_traits/is_member_pointer.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__functional/unary_negate.h:
@@ -11776,8 +11784,6 @@ CMakeFiles/main.dir/src/main.cpp.o: /Users/ivanbraganets/kursovoy/src/main.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/cwctype:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/alloca.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/iomanip:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__type_traits/is_swappable.h:
 

@@ -80,6 +80,7 @@ struct Token {
   Position position;
   std::shared_ptr<Identifier> identifier = nullptr;
   std::pair<std::string, ValueType> value;
+  size_t literID = 0;
 
   Token()
     : type(undefined) {}

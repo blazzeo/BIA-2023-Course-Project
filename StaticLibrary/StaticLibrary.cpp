@@ -1,13 +1,13 @@
-#include "string"
 #include "iostream"
 #include <cctype>
+#include <cstring>
 
 extern "C" {
-  int Strlen(const std::string& str) {
-  return str.length();
+int Strlen(char* str) {
+  return strlen(str);
 }
 
-int convertToNum(const std::string& str) {
+int convertToNum(char* str) {
   int num = 0;
   bool isNegative = false;
   size_t i = 0;
@@ -17,7 +17,7 @@ int convertToNum(const std::string& str) {
     i++;
   }
 
-  while (i < str.length()) {
+  while (i < strlen(str)) {
     if (isdigit(str[i])) {
       num = num * 10 + (str[i] - '0');
       i++;
@@ -26,7 +26,18 @@ int convertToNum(const std::string& str) {
       return 0;
     }
   }
-
   return isNegative? -num : num;
+}
+
+void printInt(int x) {
+  std::cout << x << std::endl;
+}
+
+void printStr(char* str) {
+  std::cout << str << std::endl;
+}
+
+void printBool(bool x) {
+  std::cout << x << std::endl;
 }
 }
