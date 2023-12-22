@@ -1,12 +1,12 @@
-fn square : i32 (x : i32) {
-	return x * x;
+fn square : i32(x:i32) {
+  return x * x;
 };
 
 main : i32 {
 	let y: i32;
   y = 15;
 	let x: i32;
-	x = 2 * (square(20) + 4);
+  x = square(20) + 4;
 	print x;
 	let str1[10]: char;
   str1 = '54321';

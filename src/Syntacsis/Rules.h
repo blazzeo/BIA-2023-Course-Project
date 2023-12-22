@@ -44,7 +44,11 @@ Greibach greibach(
          Rule::Chain(grb("rE;")),
          Rule::Chain(grb("pE;")),
          Rule::Chain(grb("pE;N")),
-         Rule::Chain(grb("?(E){N};")),
+         Rule::Chain(grb("?(ivi){N};")),
+         Rule::Chain(grb("?(i){N};")),
+         Rule::Chain(grb("?(ivl){N};")),
+         Rule::Chain(grb("?(lvl){N};")),
+         Rule::Chain(grb("?(lvi){N};")),
          // Rule::Chain({TS('@'), TS('('), NS('Z'), TS(';'), NS('Z'), TS(';'), NS('Z'), TS(')'), TS('{'), NS('N'), TS('}'), TS(';')}), // FOR
          Rule::Chain(grb("?(E){N};N")),
          // Rule::Chain({TS('@'), TS('('), NS('Z'), TS(';'), NS('Z'), TS(';'), NS('Z'), TS(')'), TS('{'), NS('N'), TS('}'), TS(';'), NS('N')}) // FOR

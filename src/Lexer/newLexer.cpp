@@ -97,7 +97,7 @@ void checkLexem(Table& table, std::string word, std::vector<Fst::CHAIN> chains, 
           break;
         }
         case 17: {  //       MAIN
-          std::shared_ptr<Identifier> ident(new Identifier(word, i, 1));
+          std::shared_ptr<Identifier> ident(new Identifier(word, i, true));
           Token token(chain.type, lineNum, colPos, ident);
           table.identifiers.push_back(ident);
           table.tokens.push_back(token);

@@ -46,7 +46,7 @@ struct FST
     template<typename... Args>
     FST(const char* s, short ns, Args... args) : nstates(ns) {
         string = new char[strlen(s)+1];
-        strcat(string, s);
+        strcpy(string, s);
         nodes = new NODE[ns] {args...};
         rstates = new short[nstates];
         std::fill_n(rstates, nstates, -1);

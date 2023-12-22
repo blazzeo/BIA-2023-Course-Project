@@ -1407,6 +1407,7 @@ CMakeFiles/main.dir/src/Generation/Gen.cpp.o: /Users/ivanbraganets/kursovoy/src/
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/iomanip \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/iosfwd \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/istream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/iterator \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/limits \
@@ -1573,6 +1574,7 @@ CMakeFiles/main.dir/src/Generation/Gen.cpp.o: /Users/ivanbraganets/kursovoy/src/
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdarg.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h \
+  /Users/ivanbraganets/kursovoy/src/Error/Error.h \
   /Users/ivanbraganets/kursovoy/src/In/In.h \
   /Users/ivanbraganets/kursovoy/src/Lexer/newLexer.h \
   /Users/ivanbraganets/kursovoy/src/Lexer/newLexer.h \

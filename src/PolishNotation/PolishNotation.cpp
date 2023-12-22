@@ -204,11 +204,11 @@ Lexer::ValueType checkNotation(Lexer::Table &table, int &id, Sem::Scope &scope) 
   size_t i = start;
     while (!queue.empty()) {
       table.tokens[i++] = queue.front();
+      scope.innerCode.push_back(queue.front());
       queue.pop();
     }   
-  if (i < end)
-    for (size_t ii = end - quSize, j = end - quSize; ii < end; ii++)
-      table.tokens.erase(table.tokens.begin()+j);
+  scope.innerCode.push_back(table.tokens[end]);
+  table.tokens.erase(table.tokens.begin()+i, table.tokens.begin()+end);
   // printTable(table, start - 2, end + 2);
   id = start + quSize;
   return returnType;

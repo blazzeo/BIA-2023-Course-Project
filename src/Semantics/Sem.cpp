@@ -32,7 +32,7 @@ std::shared_ptr<Lexer::Identifier> checkIdentifier(Scope *scope, std::shared_ptr
   return result;
 }
 
-Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
+Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope, size_t offset) {
   Scope scope;
   size_t stackSize = 0;
   if (!prevScope) {
@@ -53,22 +53,17 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
   if (prevScope != nullptr) {
     bool parmlist = false;
     int i = id;
-    while(i > 0) {
+    while(i >= 0) {
       Lexer::Token token = table->tokens[i];
       if (token.type == Lexer::close_parm_brackets) {
         parmlist = true;  //  ParmFlag if parms available
         while(token.type != Lexer::open_parm_brackets) {
           if (token.type == Lexer::identifier) {
-            // token.identifier->offset = stackSize;
             scope.parms.push_back(token.identifier); //  Add Parms to Scope
-            // stackSize += token.identifier->size;  //  Resize Stack Size
           }
           token = table->tokens[--i];
         }
       }
-      // if (token.type == Lexer::func) {
-      //     scope.specs.isFunc = true;
-      // }
       if (token.type == Lexer::condition) { // IF Token
         scope.specs.name = "if";
         scope.specs.returnType = Lexer::undef;
@@ -78,6 +73,7 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
         if (!parmlist) break;
 
         token.identifier->parms = scope.parms;
+        // offset;
 
         scope.specs.name = token.identifier->name;
         scope.specs.returnType = token.identifier->type;
@@ -93,6 +89,14 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
     }
   }
 
+  for (short i = scope.parms.size()-1 , size = 8; i >= 0; i--) {
+    size += scope.parms[i]->size;
+    scope.parms[i]->offset = size;
+  }
+
+  if (scope.specs.isFunc || scope.specs.name == "main")
+    offset = 0;
+
   Lexer::ValueType Expr = Lexer::undef; //  Expression Type
   Lexer::Token tmpIdent;
   bool returnFound = false;             //  returnFlag
@@ -105,8 +109,6 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
         scope.specs.isFunc = true;
         break;
       case Lexer::identifier : {
-        // if (token.identifier->isFunc)
-        //   scope.specs.isFunc = true;
         if (token.identifier->type != Lexer::undef) {
           bool found = false;
           for (auto parm : scope.parms) { //  find identifier in scope parms
@@ -115,7 +117,7 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
               break;
             }
           }
-          for (auto ident : scope.Identifiers) { //   find identifier in scope Identifiers
+          for (auto ident : scope.Identifiers) { //   find identifier in scope Identifier
             if (ident->name == token.identifier->name) { 
               found = true;
               break;
@@ -123,7 +125,7 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
           }
           if (found) throw ERROR_THROW_WORD(403, token.identifier->name, table->tokens[id].position); //   if ident was declared before
           scope.offset_length += token.identifier->size;
-          token.identifier->offset = scope.offset_length;
+          token.identifier->offset = -(scope.offset_length + offset);
           scope.Identifiers.push_back(token.identifier); //  if ident wasn't found before push
         } else {  //  if identifier hasn't got type -> find first declaration
           auto result = checkIdentifier(&scope, table->tokens[id].identifier);
@@ -131,13 +133,13 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
             throw ERROR_THROW_POS(402, table->tokens[id].position);
           }
           table->tokens[id].identifier = result;
-          // scope.offset_length += result->size;
         }
         tmpIdent = table->tokens[id];
         break;
       }
       case Lexer::open_app_brackets : {
-        scope.nextScopes.push_back(scopenize(table, id, &scope));
+        scope.nextScopes.push_back(scopenize(table, id, &scope, scope.offset_length + offset));
+        scope.offset_length += scope.nextScopes.back().offset_length;
         if (!scope.nextScopes.back().parms.empty() && scope.nextScopes.back().specs.name != "if") {
           for (size_t i=0; i<scope.nextScopes.back().parms.size();++i)
             scope.Identifiers.erase(scope.Identifiers.end()-1);
@@ -149,14 +151,6 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope) {
       }
       case Lexer::equals: { //  PolishNotation Check
         Expr = checkNotation(*table, id, scope);
-        // if (table->tokens[id-1].identifier->type != Expr)
-        // if (table->tokens[id-1].type == Lexer::identifier && table->tokens[id-1].identifier->type != Expr) {
-        //   throw ERROR_THROW_POS(407, table->tokens[id-1].position);
-        // } else if (table->tokens[id-3].type == Lexer::identifier && table->tokens[id-3].identifier->type != Expr) {
-        //   throw ERROR_THROW_POS(407, table->tokens[id-1].position);
-        // } else if (table->tokens[id-6].type == Lexer::identifier && table->tokens[id-6].identifier->type != Expr) {
-        //   throw ERROR_THROW_POS(407, table->tokens[id-1].position);
-        // }
         if (tmpIdent.identifier->type != Expr) {
           throw ERROR_THROW_POS(407, tmpIdent.position);
         }

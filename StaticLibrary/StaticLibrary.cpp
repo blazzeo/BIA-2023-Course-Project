@@ -3,11 +3,11 @@
 #include <cstring>
 
 extern "C" {
-int Strlen(char* str) {
+int __stdcall Strlen(const char* str) {
   return strlen(str);
 }
 
-int convertToNum(char* str) {
+int __stdcall convertToNum(const char* str) {
   int num = 0;
   bool isNegative = false;
   size_t i = 0;
@@ -29,15 +29,21 @@ int convertToNum(char* str) {
   return isNegative? -num : num;
 }
 
-void printInt(int x) {
+void __stdcall printInt(int x) {
   std::cout << x << std::endl;
 }
 
-void printStr(char* str) {
+void __stdcall printStr(const char* str) {
+  if (str == nullptr) {
+    std::cout << "NULL" << std::endl;
+    return;
+  }
   std::cout << str << std::endl;
+  return;
 }
 
-void printBool(bool x) {
+void __stdcall printBool(bool x) {
   std::cout << x << std::endl;
+  return;
 }
 }

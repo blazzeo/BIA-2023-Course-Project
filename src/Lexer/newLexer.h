@@ -58,7 +58,7 @@ struct Identifier {
   std::string name;
   ValueType type;
   size_t size = 0;
-  size_t offset = 0;
+  int offset = 0;
   bool isFunc = 0;
   std::variant<int, std::string, bool> value = "undef";
   std::vector<std::shared_ptr<Lexer::Identifier>> parms{};

@@ -21,7 +21,7 @@ struct Scope {
     std::vector<Lexer::Token> innerCode;
 };
 
-Scope scopenize(Lexer::Table*, int&, Scope* = nullptr);
+Scope scopenize(Lexer::Table*, int&, Scope* = nullptr, size_t = 0);
 void PrintTable(Scope, short = 0);
 std::shared_ptr<Lexer::Identifier> checkIdentifier(Scope *scope, std::shared_ptr<Lexer::Identifier> &ident);
 

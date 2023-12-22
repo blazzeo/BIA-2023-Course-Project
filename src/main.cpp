@@ -9,6 +9,7 @@
 #include "Syntacsis/MFST.h"
 #include "Semantics/Sem.h"
 #include "Generation/Gen.h"
+#include <memory>
 
 int main(int argc, char* argv[]) {
     Out::OUT out;
@@ -32,10 +33,11 @@ int main(int argc, char* argv[]) {
     // SEMANTICS
         int i = 0;
         Sem::Scope structure = Sem::scopenize(&table, i);
-        // Sem::PrintTable(structure);
+        Sem::PrintTable(structure);
     // GENERATION
-    // auto ASM = Gen::CreateAsmFile("BIA-2023");
-    // Gen::GenerateAsm(ASM, structure);
+    auto ASM = Gen::CreateAsmFile("BIA-2023");
+    Gen::GenerateAsm(ASM, structure);
+    Gen::GenerateFile(ASM);
         // Out::WriteOut(out, table);
         Log::WriteIn(log, in);
         Log::Close(log);
