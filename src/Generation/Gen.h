@@ -20,11 +20,11 @@ struct AsmCode {
     includelib kernel32.lib\n\
     includelib libucrt.lib\n\
     includelib StaticLib.lib\n\
-    EXTRN convertToNum: PROC\n\
-    EXTRN Strlen: PROC\n\
-    EXTRN printInt: PROC\n\
-    EXTRN printStr: PROC\n\
-    EXTRN printBool: PROC\n\
+    convertToNum PROTO : byte\n\
+    Strlen PROTO : byte\n\
+    printInt PROTO : dword\n\
+    printStr PROTO : byte\n\
+    printBool PROTO : byte\n\
     ExitProcess PROTO : DWORD\n\n"};
   ostringstream Stack;
   ostringstream Const;

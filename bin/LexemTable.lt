@@ -37,16 +37,12 @@
               ;         ;         8
      Identifier         i         9
               =         =         9
-        Literal         l         9         2
-              *         v         9
-      Open Parm         (         9
      Identifier         i         9
       Open Parm         (         9
         Literal         l         9        20
      Close Parm         )         9
               +         v         9
         Literal         l         9         4
-     Close Parm         )         9
               ;         ;         9
           print         p        10
      Identifier         i        10
@@ -81,6 +77,11 @@
      Identifier         i        16
           Colon         :        16
             i32         t        16
+              =         =        16
+     Identifier         i        16
+      Open Parm         (        16
+     Identifier         i        16
+     Close Parm         )        16
               ;         ;        16
              if         ?        17
       Open Parm         (        17
@@ -104,11 +105,18 @@
           Colon         :        22
             i32         t        22
               ;         ;        22
-          print         p        23
      Identifier         i        23
+              =         =        23
+     Identifier         i        23
+      Open Parm         (        23
+     Identifier         i        23
+     Close Parm         )        23
               ;         ;        23
-         return         r        24
-        Literal         l        24         0
+          print         p        24
+     Identifier         i        24
               ;         ;        24
-  Close Bracket         }        25
+         return         r        25
+        Literal         l        25         0
               ;         ;        25
+  Close Bracket         }        26
+              ;         ;        26

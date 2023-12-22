@@ -17,7 +17,12 @@
               z     undef     undef         
               z     undef     undef         
             len       i32         0         
+         Strlen     undef     undef         
+           str1     undef     undef         
             len     undef     undef         
             len     undef     undef         
             num       i32         0         
+            num     undef     undef         
+   convertToNum     undef     undef         
+           str1     undef     undef         
             num     undef     undef         
