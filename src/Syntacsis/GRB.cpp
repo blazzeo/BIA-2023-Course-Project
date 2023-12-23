@@ -34,7 +34,7 @@ namespace GRB
 std::vector<GRBALPHABET> grb(const std::string& str) {
   std::vector<GRBALPHABET> grb;
   for(auto lexem : str) {
-    if (lexem > 'A' && lexem < 'Z') {
+    if (lexem >= 'A' && lexem <= 'Z') {
       grb.push_back(NS(lexem));
     } else grb.push_back(TS(lexem));
   }

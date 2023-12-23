@@ -3,24 +3,24 @@ fn square : i32(x:i32) {
 };
 
 main : i32 {
-	let y: i32;
+  let y: i32;
   y = 15;
-	let x: i32;
-  x = square(20) + 4;
-	print x;
-	let str1[10]: char;
+  let x: i32;
+  x = 2 * (square(20) + 4);
+  print x;
+  let str1[10]: char;
   str1 = '54321';
   let z: bool;
   z = true;
-	if(z) {
-		let len : i32 = Strlen(str1);
-		if (len == 10) {
-			print len;
-		};
-		print 'length is less than 10';
-	};
+  if(z) {
+	  let len : i32 = Strlen(str1);
+	  if (len == 10) {
+	  	print len;
+	  };
+	  print 'length is less than 10';
+  };
   let num: i32;
   num = convertToNum(str1);
   print num;
-	return 0;
+  return 0;
 };

@@ -17,11 +17,12 @@ struct Scope {
     std::vector<std::shared_ptr<Lexer::Identifier>> Identifiers;
     std::vector<std::shared_ptr<Lexer::Identifier>> parms;
     Scope* prevScope = nullptr;
-    std::vector<Scope> nextScopes;
+    std::vector<Scope*> nextScopes;
     std::vector<Lexer::Token> innerCode;
 };
 
-Scope scopenize(Lexer::Table*, int&, Scope* = nullptr, size_t = 0);
+Scope* scopenize(Lexer::Table*, int&, Scope* = nullptr, size_t = 0);
+void MainCheck(Scope);
 void PrintTable(Scope, short = 0);
 std::shared_ptr<Lexer::Identifier> checkIdentifier(Scope *scope, std::shared_ptr<Lexer::Identifier> &ident);
 

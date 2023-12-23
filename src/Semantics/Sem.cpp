@@ -21,7 +21,7 @@ std::shared_ptr<Lexer::Identifier> checkIdentifier(Scope *scope, std::shared_ptr
   if (!result) {
     for (auto parm : scope->parms) { //   check in parms
       if (parm->name == ident->name) {
-        result = parm;
+        return parm;
         break;
       }
     }
@@ -32,8 +32,10 @@ std::shared_ptr<Lexer::Identifier> checkIdentifier(Scope *scope, std::shared_ptr
   return result;
 }
 
-Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope, size_t offset) {
-  Scope scope;
+Scope* scopenize(Lexer::Table *table, int& id, Scope *prevScope, size_t offset) {
+  Scope *scope_ptr = new Scope();
+  Scope &scope = *scope_ptr;
+  scope.prevScope = prevScope;
   size_t stackSize = 0;
   if (!prevScope) {
     scope.specs.name = "GLOBAL";
@@ -47,14 +49,14 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope, size_t offset) {
     scope.Identifiers.push_back(convertToNum);
   }
   else id++;
-  scope.prevScope = prevScope;
 
   //  SCOPE SPECS
   if (prevScope != nullptr) {
     bool parmlist = false;
-    int i = id;
-    while(i >= 0) {
-      Lexer::Token token = table->tokens[i];
+    int i = id - 2;
+    Lexer::Token token = table->tokens[i];
+    while(i >= 0 && (token.type != Lexer::semi || token.type != Lexer::open_app_brackets)) {
+      token = table->tokens[i];
       if (token.type == Lexer::close_parm_brackets) {
         parmlist = true;  //  ParmFlag if parms available
         while(token.type != Lexer::open_parm_brackets) {
@@ -63,6 +65,11 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope, size_t offset) {
           }
           token = table->tokens[--i];
         }
+      }
+      if (token.type == Lexer::loop) {
+        scope.specs.name = "for";
+        scope.specs.returnType = Lexer::undef;
+        break;
       }
       if (token.type == Lexer::condition) { // IF Token
         scope.specs.name = "if";
@@ -73,7 +80,6 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope, size_t offset) {
         if (!parmlist) break;
 
         token.identifier->parms = scope.parms;
-        // offset;
 
         scope.specs.name = token.identifier->name;
         scope.specs.returnType = token.identifier->type;
@@ -90,8 +96,8 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope, size_t offset) {
   }
 
   for (short i = scope.parms.size()-1 , size = 8; i >= 0; i--) {
-    size += scope.parms[i]->size;
     scope.parms[i]->offset = size;
+    size += scope.parms[i]->size;
   }
 
   if (scope.specs.isFunc || scope.specs.name == "main")
@@ -129,7 +135,7 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope, size_t offset) {
           scope.Identifiers.push_back(token.identifier); //  if ident wasn't found before push
         } else {  //  if identifier hasn't got type -> find first declaration
           auto result = checkIdentifier(&scope, table->tokens[id].identifier);
-          if (result == nullptr) { //   if identifier's declaration wasn't found
+          if (result == nullptr) { //   if idenifier's declaration wasn't found
             throw ERROR_THROW_POS(402, table->tokens[id].position);
           }
           table->tokens[id].identifier = result;
@@ -138,21 +144,20 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope, size_t offset) {
         break;
       }
       case Lexer::open_app_brackets : {
-        scope.nextScopes.push_back(scopenize(table, id, &scope, scope.offset_length + offset));
-        scope.offset_length += scope.nextScopes.back().offset_length;
-        if (!scope.nextScopes.back().parms.empty() && scope.nextScopes.back().specs.name != "if") {
-          for (size_t i=0; i<scope.nextScopes.back().parms.size();++i)
+        scope.nextScopes.push_back(scopenize(table, id, scope_ptr, scope.offset_length + offset));
+        scope.offset_length += scope.nextScopes.back()->offset_length;
+        if (!scope.nextScopes.back()->parms.empty() && 
+            (scope.nextScopes.back()->specs.name != "if" && scope.nextScopes.back()->specs.name != "for")) {
+          for (size_t i=0; i<scope.nextScopes.back()->parms.size();++i)
             scope.Identifiers.erase(scope.Identifiers.end()-1);
         }
-        // if (scope.nextScopes.back().specs.returnType!=Lexer::undef &&
-        //   scope.nextScopes.back().specs.name!="main")
-        //                                     scope.Identifiers.erase(scope.Identifiers.end()-1);
         break;
       }
       case Lexer::equals: { //  PolishNotation Check
         Expr = checkNotation(*table, id, scope);
         if (tmpIdent.identifier->type != Expr) {
-          throw ERROR_THROW_POS(407, tmpIdent.position);
+          std::cout << tmpIdent.identifier->name << std::endl;
+          throw ERROR_THROW_POS(406, tmpIdent.position);
         }
         break;
       }
@@ -167,7 +172,7 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope, size_t offset) {
       case Lexer::close_app_brackets : {
         if (scope.specs.isFunc && !returnFound)
           throw ERROR_THROW_POS(404, table->tokens[id-1].position);
-        return scope;
+        return &scope;
         break;
       }
       default: {
@@ -178,10 +183,24 @@ Scope scopenize(Lexer::Table *table, int& id, Scope *prevScope, size_t offset) {
     ++id;
   }
 
-  return scope;
+  return &scope;
 }
 
 using namespace std;
+
+bool recursiveCheck(Scope scope) {
+  for (auto nScope : scope.nextScopes) {
+    if (nScope->specs.name == "main")
+      return true;
+  }
+  return false;
+}
+
+void MainCheck(Scope scope) {
+  if (!recursiveCheck(scope)) {
+    throw ERROR_THROW(407);
+  }
+}
 
 void PrintTable(Scope scope, short level) {
   string type [4] = {
@@ -208,10 +227,10 @@ void PrintTable(Scope scope, short level) {
   if (!scope.nextScopes.empty()) {
     cout << tabs << "Next scopes: \n";
     for (size_t i = 0; i < scope.nextScopes.size(); i++) {
-      cout << tabs << i << '\t' << scope.nextScopes[i].specs.name << '\t' << type[scope.nextScopes[i].specs.returnType] << endl;
+      cout << tabs << i << '\t' << scope.nextScopes[i]->specs.name << '\t' << type[scope.nextScopes[i]->specs.returnType] << endl;
     }
     for(auto nscope : scope.nextScopes) {
-      PrintTable(nscope, level+1);
+      PrintTable(*nscope, level+1);
     }
   }
   return;

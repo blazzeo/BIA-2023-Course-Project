@@ -8,9 +8,19 @@
      Identifier         i         1
           Colon         :         1
             i32         t         1
+              ,         ,         1
+     Identifier         i         1
+          Colon         :         1
+            i32         t         1
+              ,         ,         1
+     Identifier         i         1
+          Colon         :         1
+            i32         t         1
      Close Parm         )         1
    Open Bracket         {         1
          return         r         2
+     Identifier         i         2
+              *         v         2
      Identifier         i         2
               *         v         2
      Identifier         i         2
@@ -37,12 +47,20 @@
               ;         ;         8
      Identifier         i         9
               =         =         9
+        Literal         l         9         2
+              *         v         9
+      Open Parm         (         9
      Identifier         i         9
       Open Parm         (         9
         Literal         l         9        20
+              ,         ,         9
+        Literal         l         9        10
+              ,         ,         9
+        Literal         l         9         1
      Close Parm         )         9
               +         v         9
         Literal         l         9         4
+     Close Parm         )         9
               ;         ;         9
           print         p        10
      Identifier         i        10
@@ -86,7 +104,7 @@
              if         ?        17
       Open Parm         (        17
      Identifier         i        17
-             ==         v        17
+             ==         e        17
         Literal         l        17        10
      Close Parm         )        17
    Open Bracket         {        17

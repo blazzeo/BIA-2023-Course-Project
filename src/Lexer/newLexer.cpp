@@ -14,7 +14,7 @@
 #define STR '\''
 #define SEPARATOR '$'
 
-const std::string SEPARATORS = " /:;=*,+-()[]{}<>\t!";
+const std::string SEPARATORS = " /%:;=*,+-()[]{}<>\t!";
 std::vector<Fst::CHAIN> vectorOfChains = {STR_LITER, MAIN, INT_LITER, BOOL_LITER, RETURN, FUNCTION, PRINT, DECLARE, LITER, IF, FOR, TRUE, FALSE, IDENTIFIER};
 std::vector<Fst::CHAIN> vectorOfSeparators = {DIV, SEMI, CLOSE_APP_BRACKET, OPEN_APP_BRACKET, OPEN_PARM_BRACKET, CLOSE_PARM_BRACKET, OPEN_SQUARE, CLOSE_SQUARE, SUM, COLON, SUB, COMMA, MULTIPLY, MOD, LESS, GREATER, EQUALS, EQUAL, NEQUAL};
 
@@ -57,7 +57,7 @@ void checkLexem(Table& table, std::string word, std::vector<Fst::CHAIN> chains, 
           table.tokens.push_back(token);
           table.identifiers.back()->type = str;
           table.identifiers.back()->value = "";
-          table.identifiers.back()->size = offset_length + 1;
+          table.identifiers.back()->size = 4;
           offset_length = 0;
           break;
         }
@@ -66,7 +66,7 @@ void checkLexem(Table& table, std::string word, std::vector<Fst::CHAIN> chains, 
           table.tokens.push_back(token);
           table.identifiers.back()->type = bol;
           table.identifiers.back()->value = false;
-          table.identifiers.back()->size = 1;
+          table.identifiers.back()->size = 4;
           break;
         }
         case 14: {  //      IDENTIFIER
@@ -112,7 +112,7 @@ void checkLexem(Table& table, std::string word, std::vector<Fst::CHAIN> chains, 
       return;
     }
   }
-  throw ERROR_THROW_LEXER(114, lineNum, colPos, word);
+  throw ERROR_THROW_LEXER(201, lineNum, colPos, word);
 }
 
 std::string findSymbolIndex(const unsigned char* str) {

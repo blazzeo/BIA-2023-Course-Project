@@ -1,14 +1,14 @@
 
 0	f
-1	i:t(i:t){
-2	riiv;
+1	i:t(i:t,i:t,i:t){
+2	riiviv;
 3	};
 4	m
 5	:t{
 6	di:t;
 7	i=l;
 8	di:t;
-9	i=lilv;
+9	i=llllilvv;
 10	pi;
 11	di[l]:t;
 12	i=l;
@@ -16,7 +16,7 @@
 14	i=l;
 15	?(i){
 16	di:t=ii;
-17	?(ivl){
+17	?(iel){
 18	pi;
 19	};
 20	pl;

@@ -44,14 +44,18 @@ Greibach greibach(
          Rule::Chain(grb("rE;")),
          Rule::Chain(grb("pE;")),
          Rule::Chain(grb("pE;N")),
-         Rule::Chain(grb("?(ivi){N};")),
          Rule::Chain(grb("?(i){N};")),
-         Rule::Chain(grb("?(ivl){N};")),
-         Rule::Chain(grb("?(lvl){N};")),
-         Rule::Chain(grb("?(lvi){N};")),
-         // Rule::Chain({TS('@'), TS('('), NS('Z'), TS(';'), NS('Z'), TS(';'), NS('Z'), TS(')'), TS('{'), NS('N'), TS('}'), TS(';')}), // FOR
-         Rule::Chain(grb("?(E){N};N")),
-         // Rule::Chain({TS('@'), TS('('), NS('Z'), TS(';'), NS('Z'), TS(';'), NS('Z'), TS(')'), TS('{'), NS('N'), TS('}'), TS(';'), NS('N')}) // FOR
+         Rule::Chain(grb("?(iZi){N};")),
+         Rule::Chain(grb("?(iZl){N};")),
+         Rule::Chain(grb("?(lZl){N};")),
+         Rule::Chain(grb("?(lZi){N};")),
+         Rule::Chain(grb("?(i){N};N")),
+         Rule::Chain(grb("?(iZi){N};N")),
+         Rule::Chain(grb("?(iZl){N};N")),
+         Rule::Chain(grb("?(lZl){N};N")),
+         Rule::Chain(grb("?(lZi){N};N")),
+         // Rule::Chain(grb("@(di:t=l;iZl;i=E;){N};")),
+         // Rule::Chain(grb("@(di:t=l;iZl;i=E;){N};N")),
          }),
     Rule(NS('E'),
          GRB_ERROR_SERIES + 2, // Выражение
@@ -90,15 +94,14 @@ Greibach greibach(
          {
          Rule::Chain(grb("vE")),
          Rule::Chain(grb("vEM")),
-         Rule::Chain(grb("==E")),
-         Rule::Chain(grb("!=E")),
          }),
-    // Rule(NS('Z'), GRB_ERROR_SERIES + 7, // Ошибка в условии цикла
-    //      // Z -> di:t=E | di:t=E,Z | i=E
-    //      {
-    //      Rule::Chain(grb("di:t=E")),
-    //      Rule::Chain(grb("di:t=E,Z")),
-    //      Rule::Chain(grb("i=E"))
-    //      })
+    Rule(NS('Z'), GRB_ERROR_SERIES + 5, // Ошибка в условии if
+         // Z -> > | < | e | n
+         {
+         Rule::Chain(grb(">")),
+         Rule::Chain(grb("<")),
+         Rule::Chain(grb("e")),
+         Rule::Chain(grb("n")),
+         }),
   });
 }

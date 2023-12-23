@@ -32,24 +32,25 @@ int main(int argc, char* argv[]) {
         mfst.printrules();
     // SEMANTICS
         int i = 0;
-        Sem::Scope structure = Sem::scopenize(&table, i);
-        Sem::PrintTable(structure);
+        Sem::Scope* structure = Sem::scopenize(&table, i);
+        Sem::MainCheck(*structure);
+        Sem::PrintTable(*structure);
     // GENERATION
         auto ASM = Gen::CreateAsmFile("BIA-2023");
-        Gen::GenerateAsm(ASM, structure);
+        Gen::GenerateAsm(ASM, *structure);
         Gen::GenerateFile(ASM);
         Out::WriteOut(out, table);
         Log::WriteIn(log, in);
         Log::Close(log);
     }
     catch (Error::ERROR e) {
-        if (out.stream && out.stream->is_open()) {
-            Out::WriteError(out, e);
-            return 1;
-        } else {
+        // if (out.stream && out.stream->is_open()) {
+        //     Out::WriteError(out, e);
+        //     return 1;
+        // } else {
             Error::printErorr(e);
             return 1;
-        }
+        // }
     }
     return 0;
 }

@@ -87,7 +87,7 @@ Lexer::ValueType checkNotation(Lexer::Table &table, int &id, Sem::Scope &scope) 
         } else {                                    // IF NOT FUNC
           if (fnFlag) {
             if(!checkParm(fn, table.tokens[id], parm_id))
-              throw ERROR_THROW(406);
+              throw ERROR_THROW_POS(405, table.tokens[id].position);
             stack.push(table.tokens[id]);
             ++parm_id;
           } else {

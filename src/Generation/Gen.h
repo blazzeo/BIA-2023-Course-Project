@@ -19,7 +19,7 @@ struct AsmCode {
     .model flat, stdcall\n\
     includelib kernel32.lib\n\
     includelib libucrt.lib\n\
-    includelib StaticLib.lib\n\
+    includelib C:\\StaticLib1.lib\n\
     convertToNum PROTO : byte\n\
     Strlen PROTO : byte\n\
     printInt PROTO : dword\n\

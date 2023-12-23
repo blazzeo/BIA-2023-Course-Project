@@ -67,7 +67,7 @@ struct Identifier {
   : name(nm), type(tp), isFunc(isfunc) {}
 };
 
-const std::string tokenTypes = " ;{}()[]vvvv,=ittmlrfdput:?@vvvvvll";
+const std::string tokenTypes = " ;{}()[]vvvv,=ittmlrfdput:?@<>venll";
 
 struct Position {
   short line = 0;

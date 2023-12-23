@@ -2,8 +2,11 @@
            Name  DataType     Value    IsFunc
          square       i32         0     Func
               x       i32         0         
+              y       i32         0         
+              z       i32         0         
               x     undef     undef         
-              x     undef     undef         
+              y     undef     undef         
+              z     undef     undef         
            main       i32         0     Func
               y       i32         0         
               y     undef     undef         
